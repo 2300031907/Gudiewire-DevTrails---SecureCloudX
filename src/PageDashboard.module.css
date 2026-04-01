@@ -1,0 +1,237 @@
+/* ═══════════════════════════════════════════════════════════════════
+   PageDashboard.module.css
+   Tone: Polished Copper & Warm Slate — data-rich but human.
+   This is the main dashboard widget page — rich, dense, warm.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Tokens ─────────────────────────────────────────────────────── */
+:root {
+  --pd-accent:   #f59e0b;
+  --pd-accent2:  #fbbf24;
+  --pd-copper:   #d97706;
+  --pd-surface:  rgba(255,247,230,0.03);
+  --pd-border:   rgba(210,165,110,0.12);
+  --pd-border2:  rgba(245,158,11,0.24);
+}
+
+/* ── Page wrapper ───────────────────────────────────────────────── */
+.page {
+  padding: 1.75rem 2rem 3rem;
+  min-height: 100vh;
+}
+
+/* ── Page header ────────────────────────────────────────────────── */
+.header { margin-bottom: 1.5rem; }
+.title {
+  font-size: 1.6rem; font-weight: 800;
+  letter-spacing: -.02em; margin-bottom: .2rem;
+  background: linear-gradient(90deg, var(--pd-accent2), #e0e7ff);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.sub { font-size: .82rem; color: var(--text2); }
+
+/* ── Stat cards row ─────────────────────────────────────────────── */
+.statGrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1rem; }
+.statCard {
+  background: var(--pd-surface);
+  border: 1px solid var(--pd-border);
+  border-radius: 18px; padding: 1.25rem;
+  position: relative; overflow: hidden;
+  animation: fadeUp .45s ease both;
+  transition: border-color .25s, box-shadow .25s;
+}
+.statCard:hover { border-color: var(--pd-border2); box-shadow: 0 0 24px rgba(245,158,11,0.05); }
+.statNum {
+  font-family: var(--mono); font-size: 1.4rem; font-weight: 700;
+  line-height: 1; margin-top: .5rem;
+}
+.statLabel { font-size: .65rem; color: var(--text3); margin-top: 4px; }
+
+/* ── Row grids ──────────────────────────────────────────────────── */
+.row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+/* ── Widget card ────────────────────────────────────────────────── */
+.card {
+  background: var(--pd-surface);
+  border: 1px solid var(--pd-border);
+  border-radius: 18px; padding: 1.25rem;
+  position: relative; overflow: hidden;
+  animation: fadeUp .45s ease both;
+  transition: border-color .25s, box-shadow .25s;
+}
+.card::before {
+  content: ''; position: absolute; inset: 0; border-radius: 18px;
+  background: radial-gradient(ellipse 70% 50% at 50% -15%, rgba(245,158,11,0.04), transparent);
+  pointer-events: none;
+}
+.card:hover { border-color: var(--pd-border2); box-shadow: 0 0 28px rgba(245,158,11,0.05); }
+
+/* ── Card title row ─────────────────────────────────────────────── */
+.cardTitle {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: .9rem;
+}
+.cardTitleLeft { display: flex; align-items: center; gap: 6px; }
+.cardTitleIcon { font-size: .9rem; opacity: .55; }
+.cardTitleText { font-size: .75rem; font-weight: 700; color: var(--text1); letter-spacing: -.01em; }
+
+/* ── Risk gauge card ────────────────────────────────────────────── */
+.riskFooter {
+  margin-top: .85rem; padding-top: .75rem;
+  border-top: 1px solid var(--pd-border);
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: .75rem; color: var(--text2);
+}
+.riskFooterVal { font-family: var(--mono); font-weight: 700; color: var(--pd-accent); }
+
+/* ── Coverage card ──────────────────────────────────────────────── */
+.coverageId { font-size: .7rem; font-family: var(--mono); color: var(--text3); margin-bottom: .2rem; }
+.coveragePeriod { font-size: .7rem; color: var(--text2); margin-bottom: .8rem; }
+.coverageAmt {
+  font-family: var(--mono); font-size: 1.8rem; font-weight: 700;
+  color: var(--text1); letter-spacing: -.03em; line-height: 1;
+}
+.coverageAmtSub { font-size: .7rem; color: var(--text3); margin-top: .2rem; margin-bottom: .75rem; }
+.progressRow {
+  display: flex; justify-content: space-between;
+  font-size: .65rem; color: var(--text3); margin-top: 4px; margin-bottom: .6rem;
+}
+
+/* ── Heatmap ────────────────────────────────────────────────────── */
+.heatmap {
+  width: 100%; height: 150px; border-radius: 14px; overflow: hidden; position: relative;
+}
+.heatmapLegend {
+  display: flex; gap: 8px; margin-top: .65rem; flex-wrap: wrap;
+}
+.legendItem { display: flex; align-items: center; gap: 4px; font-size: .62rem; color: var(--text3); }
+.legendDot { width: 7px; height: 7px; border-radius: 2px; }
+
+/* ── Alert list ─────────────────────────────────────────────────── */
+.alertItem {
+  display: flex; align-items: center; gap: .65rem;
+  padding: .55rem .7rem; border-radius: 10px;
+  background: var(--pd-surface);
+  border: 1px solid rgba(210,165,110,0.08);
+  margin-bottom: .4rem; cursor: pointer; transition: all .18s;
+}
+.alertItem:hover { border-color: var(--pd-border2); transform: translateX(2px); }
+.alertDot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.alertTitle { font-size: .75rem; font-weight: 600; }
+.alertMeta { font-size: .62rem; color: var(--text3); margin-top: 1px; }
+.alertTime { font-size: .62rem; color: var(--text3); font-family: var(--mono); flex-shrink: 0; }
+
+/* ── Gigscore ring card ─────────────────────────────────────────── */
+.gigRow { display: flex; align-items: center; gap: 1rem; margin-bottom: .85rem; }
+.gigMetaRow {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: .3rem .55rem;
+  background: var(--pd-surface);
+  border-radius: 8px; margin-bottom: .35rem;
+  font-size: .68rem; color: var(--text2);
+}
+.gigMetaVal { font-family: var(--mono); font-weight: 700; }
+
+/* ── Weekly earnings card ───────────────────────────────────────── */
+.earningsSplit { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.earningsDivider { border-left: 1px solid var(--pd-border); padding-left: 1rem; }
+.earningsAmt { font-family: var(--mono); font-size: 1.4rem; font-weight: 700; color: var(--text1); line-height: 1; }
+.earningsLabel { font-size: .65rem; color: var(--text3); margin-top: .15rem; }
+.earningsWeekly {
+  font-family: var(--mono); font-size: 1.5rem; font-weight: 700;
+  letter-spacing: -.03em; line-height: 1;
+}
+.earningsWeeklySub { font-size: .65rem; color: var(--text3); margin-top: .15rem; margin-bottom: .6rem; }
+.earningsRow {
+  display: flex; justify-content: space-between;
+  padding: .38rem 0;
+  border-top: 1px solid rgba(210,165,110,0.07);
+  font-size: .72rem; color: var(--text2);
+}
+.earningsRowVal { font-family: var(--mono); font-weight: 700; }
+
+/* ── Weather disruption card ────────────────────────────────────── */
+.weatherHead {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: .5rem;
+}
+.weatherTitle { font-size: 1.1rem; font-weight: 800; color: var(--blue); }
+.weatherSub { font-size: .72rem; color: var(--text2); }
+.weatherTrigger {
+  padding: .55rem .75rem; border-radius: 10px;
+  background: rgba(239,68,68,0.07); border: 1px solid rgba(239,68,68,0.15);
+  font-size: .7rem; color: var(--red); margin-bottom: .65rem;
+}
+.weatherMiniGrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: .5rem; margin-top: .75rem; }
+.weatherMiniCell {
+  background: var(--pd-surface); border: 1px solid var(--pd-border);
+  border-radius: 9px; padding: .45rem; text-align: center;
+}
+.weatherMiniEmoji { font-size: .9rem; }
+.weatherMiniVal { font-family: var(--mono); font-size: .78rem; font-weight: 700; color: var(--text1); }
+.weatherMiniLabel { font-size: .58rem; color: var(--text3); }
+
+/* ── Coverage status card ───────────────────────────────────────── */
+.coverageStatus {
+  font-family: var(--mono); font-size: 1.6rem; font-weight: 700;
+  color: var(--text1); letter-spacing: -.03em; margin-bottom: .2rem;
+}
+.coverageStatusSub { font-size: .7rem; color: var(--text3); margin-bottom: .75rem; }
+.coverageMetaRow {
+  display: flex; justify-content: space-between;
+  padding: .4rem 0; border-top: 1px solid var(--pd-border);
+  font-size: .72rem; color: var(--text2);
+}
+.coverageMetaVal { font-weight: 600; color: var(--text1); }
+
+/* ── Heatmap zone summary ───────────────────────────────────────── */
+.zoneGrid { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; margin-top: .75rem; }
+.zoneCell { border-radius: 10px; padding: .55rem .75rem; }
+.zoneCellLabel { font-size: .6rem; color: var(--text3); margin-bottom: .2rem; }
+.zoneCellVal { font-family: var(--mono); font-weight: 700; }
+
+/* ── Weekly breakdown grid ──────────────────────────────────────── */
+.weeklyMini {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: .75rem;
+  margin-bottom: 1rem;
+}
+.weeklyMiniCell {
+  text-align: center; padding: .65rem;
+  background: var(--pd-surface); border: 1px solid var(--pd-border);
+  border-radius: 12px;
+}
+.weeklyMiniVal { font-family: var(--mono); font-size: 1.1rem; font-weight: 700; }
+.weeklyMiniLabel { font-size: .62rem; color: var(--text3); margin-top: 3px; }
+
+.dayGrid { display: flex; gap: .5rem; flex-wrap: wrap; }
+.dayCell {
+  flex: 1; text-align: center; padding: .45rem .3rem;
+  background: var(--pd-surface); border: 1px solid var(--pd-border);
+  border-radius: 8px;
+}
+.dayLabel { font-size: .6rem; color: var(--text3); margin-bottom: 3px; }
+.dayVal { font-family: var(--mono); font-size: .72rem; font-weight: 700; }
+
+/* ── AI recommendation items ────────────────────────────────────── */
+.aiRecItem {
+  display: flex; gap: .65rem; padding: .65rem .75rem;
+  background: var(--pd-surface); border-radius: 12px;
+  margin-bottom: .45rem; transition: all .18s;
+}
+.aiRecItemUrgent { border: 1px solid rgba(210,165,110,0.2) !important; }
+.aiRecItemDefault { border: 1px solid rgba(210,165,110,0.08); }
+.aiRecTitle { font-size: .78rem; font-weight: 700; margin-bottom: 2px; }
+.aiRecSub { font-size: .65rem; color: var(--text2); line-height: 1.5; }
+
+/* ── Progress bar ───────────────────────────────────────────────── */
+.progTrack {
+  width: 100%; background: rgba(255,255,255,0.07);
+  border-radius: 3px; overflow: hidden;
+}
+.progFill {
+  height: 100%; border-radius: 3px; transition: width .6s ease;
+}
+
+/* ── Timestamp ──────────────────────────────────────────────────── */
+.ts { font-size: .6rem; color: var(--text3); display: flex; align-items: center; gap: 4px; }

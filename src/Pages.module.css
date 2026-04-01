@@ -1,0 +1,311 @@
+/* ═══════════════════════════════════════════════════════════════════
+   Pages.module.css
+   Used by Pages.jsx (Coverage, Alerts, GigScore, Payouts, Advisor)
+   Each sub-page gets its own accent within a warm professional system.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ══ SHARED PAGE SHELL ══════════════════════════════════════════════ */
+.page {
+  margin-left: 0; /* sidebar offset handled by Dashboard.jsx inline style */
+  flex: 1; min-height: 100vh;
+  padding: 1.75rem 2rem 3rem;
+  overflow-x: hidden;
+}
+.pageHeader { margin-bottom: 1.5rem; }
+.pageTitle {
+  font-size: 1.4rem; font-weight: 800;
+  letter-spacing: -.02em; margin-bottom: .2rem;
+  color: var(--text1);
+}
+.pageSub { font-size: .78rem; color: var(--text2); }
+
+/* ════════════════════════════════════════════════════════════════════
+   COVERAGE PAGE  · Tone: Burnished Bronze & Deep Navy
+   ════════════════════════════════════════════════════════════════════ */
+:root {
+  --cov-accent:   #b45309;
+  --cov-accent2:  #f59e0b;
+  --cov-surface:  rgba(255,246,230,0.03);
+  --cov-border:   rgba(180,83,9,0.16);
+  --cov-border2:  rgba(245,158,11,0.28);
+}
+
+/* Active plan banner */
+.planBanner {
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, rgba(180,83,9,0.08) 0%, rgba(245,158,11,0.04) 100%);
+  border: 1px solid var(--cov-border2);
+  border-radius: 18px; padding: 1.25rem;
+  position: relative; overflow: hidden;
+}
+.planBannerGlow {
+  position: absolute; inset: 0; border-radius: 18px;
+  background: radial-gradient(ellipse 60% 50% at 50% -10%, rgba(245,158,11,0.06), transparent);
+  pointer-events: none;
+}
+
+/* Shield card */
+.shieldCard {
+  background: rgba(255,246,230,0.03);
+  border-radius: 16px; padding: 1.1rem;
+  transition: all .2s;
+}
+.shieldCardIcon {
+  width: 36px; height: 36px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+}
+.shieldCardMiniCell {
+  padding: .4rem .55rem;
+  background: rgba(255,246,230,0.03);
+  border-radius: 8px;
+}
+.shieldMiniLabel { font-size: .58rem; color: var(--text3); margin-bottom: 2px; }
+.shieldMiniVal { font-family: var(--mono); font-size: .88rem; font-weight: 700; color: var(--text1); }
+
+/* Pricing table */
+.pricingGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.pricingCell {
+  padding: 1rem; border-radius: 14px; position: relative;
+  background: rgba(255,246,230,0.03); border: 1px solid rgba(180,83,9,0.14);
+}
+.pricingCellActive {
+  background: rgba(245,158,11,0.08) !important;
+  border: 1.5px solid rgba(245,158,11,0.3) !important;
+}
+.pricingCurrentTag {
+  position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+  background: var(--cov-accent); color: #fff;
+  font-size: .58rem; font-weight: 700; padding: 2px 10px; border-radius: 10px;
+}
+.pricingName { font-weight: 700; font-size: .88rem; margin-bottom: .4rem; }
+.pricingPrice {
+  font-family: var(--mono); font-size: 1.4rem; font-weight: 800;
+  color: var(--cov-accent2); margin-bottom: .65rem;
+}
+.pricingPriceSub { font-size: .7rem; color: var(--text3); font-family: var(--font); }
+.pricingRow {
+  display: flex; justify-content: space-between;
+  font-size: .7rem; color: var(--text2);
+  padding: .3rem 0; border-top: 1px solid rgba(180,83,9,0.1);
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   ALERTS PAGE  · Tone: Crimson & Deep Mahogany
+   ════════════════════════════════════════════════════════════════════ */
+:root {
+  --alert-high:   #ef4444;
+  --alert-med:    #f59e0b;
+  --alert-low:    #60a5fa;
+  --alert-border-h: rgba(239,68,68,0.2);
+  --alert-border-m: rgba(245,158,11,0.15);
+  --alert-border-l: rgba(96,165,250,0.12);
+}
+
+.alertStat {
+  font-family: var(--mono); font-size: 1.5rem;
+  font-weight: 700; margin-top: .5rem;
+}
+.alertStatLabel { font-size: .65rem; color: var(--text3); margin-top: 3px; }
+
+/* Priority section cards */
+.priorityHigh  { border-color: var(--alert-border-h) !important; }
+.priorityMed   { border-color: var(--alert-border-m) !important; }
+.priorityLow   { border-color: var(--alert-border-l) !important; }
+
+/* Alert row */
+.alertRow {
+  display: flex; align-items: center; gap: .7rem;
+  padding: .65rem .85rem; border-radius: 12px;
+  background: rgba(255,246,230,0.03);
+  border: 1px solid rgba(210,165,110,0.08);
+  margin-bottom: .45rem; cursor: pointer; transition: all .18s;
+}
+.alertRow:hover { border-color: rgba(245,158,11,0.22); transform: translateX(2px); }
+.alertPriBar { width: 4px; min-height: 36px; border-radius: 4px; flex-shrink: 0; }
+.alertIcon { font-size: 1.1rem; flex-shrink: 0; }
+.alertTitle { font-size: .78rem; font-weight: 700; color: var(--text1); }
+.alertSub { font-size: .65rem; color: var(--text2); margin-top: 1px; }
+.alertTime { font-size: .62rem; color: var(--text3); font-family: var(--mono); flex-shrink: 0; }
+
+/* ════════════════════════════════════════════════════════════════════
+   GIGSCORE PAGE  · Tone: Warm Indigo & Antique Gold
+   ════════════════════════════════════════════════════════════════════ */
+:root {
+  --gig-accent:  #818cf8;
+  --gig-accent2: #a5b4fc;
+  --gig-gold:    #fbbf24;
+  --gig-surface: rgba(245,243,255,0.03);
+  --gig-border:  rgba(129,140,248,0.14);
+  --gig-border2: rgba(129,140,248,0.28);
+}
+
+.gigAiBox {
+  padding: .65rem .85rem;
+  background: rgba(129,140,248,0.08);
+  border: 1px solid rgba(129,140,248,0.2);
+  border-radius: 12px;
+  font-size: .72rem; color: var(--gig-accent2); line-height: 1.65;
+}
+
+.gigTierGrid { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; margin-top: .75rem; }
+.gigTierCell {
+  padding: .45rem .65rem; border-radius: 9px;
+  background: rgba(245,243,255,0.03);
+  border: 1px solid rgba(129,140,248,0.12);
+}
+.gigTierCellActive {
+  background: rgba(129,140,248,0.1) !important;
+  border-color: rgba(129,140,248,0.3) !important;
+}
+.gigTierRange { font-family: var(--mono); font-size: .7rem; font-weight: 700; color: var(--text2); }
+.gigTierRangeActive { color: var(--gig-accent2) !important; }
+.gigTierBenefit { font-size: .6rem; color: var(--text3); margin-top: 2px; }
+
+.gigZoneWarn {
+  padding: .6rem .75rem; border-radius: 10px;
+  background: rgba(245,158,11,0.07);
+  border: 1px solid rgba(245,158,11,0.15);
+  font-size: .7rem; color: #f59e0b; line-height: 1.5;
+  margin-top: .25rem;
+}
+
+.gigOptRow {
+  display: flex; align-items: center; gap: .65rem;
+  padding: .55rem .65rem; border-radius: 10px;
+  background: rgba(245,243,255,0.03);
+  border: 1px solid rgba(129,140,248,0.1);
+  margin-bottom: .4rem;
+}
+.gigOptIcon { font-size: 1rem; flex-shrink: 0; }
+.gigOptTitle { font-size: .75rem; font-weight: 600; color: var(--text1); }
+.gigOptDetail { font-size: .62rem; margin-top: 1px; }
+
+/* ════════════════════════════════════════════════════════════════════
+   PAYOUTS PAGE  · Tone: Forest Green & Warm Parchment
+   ════════════════════════════════════════════════════════════════════ */
+:root {
+  --pay-accent:   #059669;
+  --pay-accent2:  #34d399;
+  --pay-glow:     rgba(5,150,105,0.28);
+  --pay-surface:  rgba(240,253,244,0.03);
+  --pay-border:   rgba(52,211,153,0.16);
+  --pay-border2:  rgba(52,211,153,0.28);
+}
+
+.payoutHero {
+  border-color: var(--pay-border2) !important;
+  background: linear-gradient(135deg, rgba(5,150,105,0.06), rgba(255,246,230,0.03)) !important;
+}
+.payoutHeroAmt {
+  font-family: var(--mono); font-size: 1.8rem; font-weight: 800;
+  color: var(--pay-accent2); line-height: 1;
+}
+.payoutHeroSub { font-size: .7rem; color: var(--text2); margin-top: 3px; }
+
+.payoutStat { font-family: var(--mono); font-size: 1.4rem; font-weight: 700; margin-top: .5rem; }
+
+.payoutAlert {
+  padding: .6rem .75rem;
+  background: rgba(239,68,68,0.07);
+  border: 1px solid rgba(239,68,68,0.15);
+  border-radius: 10px; margin-bottom: .75rem;
+  font-size: .72rem;
+}
+
+/* Claim table */
+.claimTable { width: 100%; border-collapse: collapse; font-size: .75rem; }
+.claimTh {
+  padding: .55rem .75rem; text-align: left;
+  color: var(--text3); font-weight: 600;
+  font-size: .65rem; text-transform: uppercase; letter-spacing: .06em;
+  border-bottom: 1px solid rgba(210,165,110,0.12);
+}
+.claimTr { border-bottom: 1px solid rgba(210,165,110,0.08); transition: background .18s; }
+.claimTr:hover { background: rgba(52,211,153,0.04); }
+.claimTd { padding: .65rem .75rem; color: var(--text1); }
+.claimTdMono { font-family: var(--mono); color: var(--text3); }
+.claimTdGreen { color: var(--pay-accent2); font-weight: 700; }
+
+/* ════════════════════════════════════════════════════════════════════
+   ADVISOR PAGE  · Tone: Warm Twilight — deep plum with amber warmth
+   ════════════════════════════════════════════════════════════════════ */
+:root {
+  --adv-accent:   #c084fc;
+  --adv-accent2:  #e879f9;
+  --adv-amber:    #fbbf24;
+  --adv-glow:     rgba(192,132,252,0.2);
+  --adv-surface:  rgba(250,240,255,0.03);
+  --adv-border:   rgba(192,132,252,0.14);
+  --adv-border2:  rgba(192,132,252,0.28);
+}
+
+.advisorRecommended {
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, rgba(192,132,252,0.08) 0%, rgba(251,191,36,0.04) 100%) !important;
+  border-color: var(--adv-border2) !important;
+}
+
+.advisorTime {
+  font-family: var(--mono); font-size: 1.6rem; font-weight: 800; color: var(--adv-accent);
+}
+
+.advisorAvoidBanner {
+  margin-top: 1rem; padding: .65rem .85rem;
+  background: rgba(239,68,68,0.07);
+  border: 1px solid rgba(239,68,68,0.15);
+  border-radius: 10px; font-size: .72rem; color: #f87171;
+}
+
+/* Timeline bars */
+.timelineRow { display: flex; gap: 4px; margin-bottom: .5rem; }
+.timelineCell { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.timelineBar {
+  width: 100%; height: 32px; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .5rem; font-weight: 700; transition: all .2s;
+}
+.timelineHr { font-size: .45rem; color: var(--text3); }
+
+/* Zone rows */
+.zoneRow {
+  display: flex; align-items: center; gap: .65rem;
+  padding: .5rem .65rem;
+  background: rgba(250,240,255,0.03);
+  border: 1px solid var(--adv-border);
+  border-radius: 10px; margin-bottom: .4rem;
+}
+
+/* AI insight box */
+.aiInsight {
+  padding: .75rem; border-radius: 12px;
+  background: rgba(192,132,252,0.08);
+  border: 1px solid rgba(192,132,252,0.2);
+  margin-bottom: .75rem;
+}
+.aiInsightTitle {
+  font-size: .7rem; font-weight: 700; color: var(--adv-accent);
+  margin-bottom: .35rem;
+}
+.aiInsightText { font-size: .72rem; color: var(--text2); line-height: 1.65; }
+
+/* Coverage opt rows */
+.covOptRow {
+  display: flex; align-items: center; gap: .6rem;
+  padding: .5rem .65rem;
+  background: rgba(250,240,255,0.03);
+  border: 1px solid var(--adv-border);
+  border-radius: 10px; margin-bottom: .38rem;
+}
+.covOptTitle { font-size: .72rem; font-weight: 600; color: var(--text1); }
+.covOptImpact { font-size: .6rem; margin-top: 1px; }
+
+/* Weather forecast rows */
+.forecastRow {
+  display: flex; align-items: center; gap: .65rem;
+  padding: .45rem .65rem;
+  background: rgba(250,240,255,0.03);
+  border: 1px solid var(--adv-border);
+  border-radius: 9px; margin-bottom: .35rem;
+}
+.forecastTime { font-size: .72rem; font-weight: 600; color: var(--text1); }
+.forecastCond { font-size: .6rem; color: var(--text2); margin-top: 1px; }

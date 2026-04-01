@@ -1,7 +1,11 @@
 // layout.jsx — Shared reusable components: Navbar, Sidebar, Card, Button, Loader, Timestamp
 
 import { useState } from 'react';
+<<<<<<< HEAD
 
+=======
+import styles from './Layout.module.css'
+>>>>>>> 351a5d7 (css changes)
 /* ═══════════════════════════════════════════
    SHARED STYLES
 ═══════════════════════════════════════════ */

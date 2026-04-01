@@ -3,7 +3,11 @@
 // Uses only CSS-in-JS inline styles + your existing CSS variables from styles.js
 
 import { useState, useEffect } from 'react';
+<<<<<<< HEAD
 
+=======
+import styles from './WeatherRiskCard.module.css'
+>>>>>>> 351a5d7 (css changes)
 /* ═══════════════════════════════════════════════
    SUB-COMPONENTS
 ═══════════════════════════════════════════════ */

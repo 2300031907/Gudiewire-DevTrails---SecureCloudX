@@ -1,0 +1,333 @@
+/* ═══════════════════════════════════════════════════════════════════
+   Dashboard.module.css
+   Tone: Cognac & Burnished Gold — the command centre feel.
+   Used by Dashboard.jsx (shell, nav, sidebar, all page wrappers).
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Tokens ─────────────────────────────────────────────────────── */
+:root {
+  --dash-accent:       #f59e0b;
+  --dash-accent2:      #fbbf24;
+  --dash-accent-dim:   rgba(245,158,11,0.12);
+  --dash-accent-border:rgba(245,158,11,0.22);
+  --dash-surface:      rgba(255,248,240,0.03);
+  --dash-surface-hover:rgba(255,248,240,0.06);
+  --dash-border:       rgba(210,165,110,0.12);
+  --dash-border-active:rgba(245,158,11,0.28);
+  --dash-red:          #f87171;
+  --dash-red-dim:      rgba(248,113,113,0.12);
+  --dash-red-border:   rgba(248,113,113,0.22);
+}
+
+/* ── Page root ──────────────────────────────────────────────────── */
+.root {
+  min-height: 100vh;
+  background: var(--bg0);
+}
+
+/* ── Top navigation ─────────────────────────────────────────────── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 1.25rem;
+  height: var(--nav-h);
+  background: rgba(12,10,8,0.93);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--dash-border);
+}
+
+.navBrand {
+  display: flex; align-items: center; gap: 9px;
+}
+
+.navLogo {
+  width: 28px; height: 28px; border-radius: 7px;
+  background: linear-gradient(135deg, var(--dash-accent), #d97706);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .8rem;
+  box-shadow: 0 0 12px rgba(245,158,11,0.45);
+}
+
+.navBrandName {
+  font-weight: 800; font-size: .88rem; letter-spacing: .04em;
+  background: linear-gradient(90deg, #fef3e2, var(--dash-accent2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+
+.navCrumb {
+  font-size: .68rem;
+  color: rgba(210,165,110,0.45);
+  margin-left: 4px;
+  font-family: var(--mono);
+}
+
+.navRight {
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* Live clock pill */
+.livePill {
+  display: flex; align-items: center; gap: 5px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: rgba(248,113,113,0.1);
+  border: 1px solid rgba(248,113,113,0.22);
+  font-size: .63rem; font-weight: 600;
+  color: var(--dash-red);
+  font-family: var(--mono);
+}
+
+.liveDot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--dash-red);
+  animation: pulse-dot-red 1.2s infinite;
+}
+
+/* Profile button */
+.profileBtn {
+  display: flex; align-items: center; gap: 7px;
+  padding: 5px 11px;
+  background: transparent;
+  border: 1px solid var(--dash-border);
+  border-radius: 9px;
+  font-size: .76rem; color: var(--text2);
+  cursor: pointer; font-family: var(--font);
+  transition: all .18s;
+}
+.profileBtn:hover {
+  border-color: var(--dash-accent-border);
+  background: var(--dash-accent-dim);
+  color: var(--text1);
+}
+
+.profileAvatar {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--dash-accent), #d97706);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .6rem; font-weight: 700; color: #1a0e00;
+}
+
+/* Settings icon button */
+.iconBtn {
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  background: transparent;
+  border: 1px solid var(--dash-border);
+  border-radius: 9px;
+  cursor: pointer; font-size: .9rem; color: var(--text2);
+  transition: all .18s;
+}
+.iconBtn:hover {
+  border-color: var(--dash-accent-border);
+  background: var(--dash-accent-dim);
+}
+
+/* Sign out button */
+.signOutBtn {
+  display: flex; align-items: center; gap: 5px;
+  padding: 5px 12px;
+  background: var(--dash-red-dim);
+  border: 1px solid var(--dash-red-border);
+  border-radius: 9px;
+  cursor: pointer; font-size: .74rem; font-weight: 600;
+  color: rgba(248,113,113,0.8);
+  font-family: var(--font);
+  transition: all .18s;
+}
+.signOutBtn:hover {
+  background: rgba(248,113,113,0.18);
+  color: var(--dash-red);
+}
+
+/* ── Sidebar ─────────────────────────────────────────────────────── */
+.sidebar {
+  position: fixed;
+  top: var(--nav-h); left: 0; bottom: 0;
+  background: rgba(12,10,8,0.96);
+  backdrop-filter: blur(20px);
+  border-right: 1px solid var(--dash-border);
+  display: flex; flex-direction: column;
+  transition: width .22s cubic-bezier(.4,0,.2,1);
+  overflow: hidden; z-index: 100;
+}
+
+/* Toggle button */
+.sidebarToggle {
+  width: 28px; height: 28px; border-radius: 8px;
+  background: var(--dash-accent-dim);
+  border: 1px solid var(--dash-accent-border);
+  color: var(--dash-accent2);
+  cursor: pointer; font-size: .75rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .18s; flex-shrink: 0;
+}
+.sidebarToggle:hover { background: rgba(245,158,11,0.22); }
+
+/* Nav section label */
+.sidebarSectionLabel {
+  font-size: .58rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .1em;
+  color: rgba(210,165,110,0.38);
+  padding: .4rem .75rem .3rem;
+}
+
+/* Nav item */
+.navItem {
+  display: flex; align-items: center;
+  border-radius: 10px; cursor: pointer;
+  margin-bottom: 2px; transition: all .18s;
+  font-size: .8rem; font-weight: 500;
+  overflow: hidden; white-space: nowrap;
+  border: 1px solid transparent;
+}
+.navItem:hover {
+  background: rgba(255,248,240,0.05);
+  color: var(--text1) !important;
+}
+.navItemActive {
+  color: var(--dash-accent2) !important;
+  background: var(--dash-accent-dim) !important;
+  border-color: var(--dash-accent-border) !important;
+}
+
+/* Badge on nav item */
+.navBadgeNew {
+  font-size: .55rem; font-weight: 700;
+  padding: 2px 6px; border-radius: 10px;
+  flex-shrink: 0;
+  background: rgba(192,132,252,0.15);
+  color: #c084fc;
+  border: 1px solid rgba(192,132,252,0.3);
+}
+.navBadgeAlert {
+  font-size: .55rem; font-weight: 700;
+  padding: 2px 6px; border-radius: 10px;
+  flex-shrink: 0;
+  background: rgba(248,113,113,0.15);
+  color: var(--dash-red);
+  border: 1px solid rgba(248,113,113,0.25);
+}
+
+/* Zone status card in sidebar bottom */
+.zoneCard {
+  background: rgba(52,211,153,0.07);
+  border: 1px solid rgba(52,211,153,0.15);
+  border-radius: 12px;
+  padding: .6rem .75rem;
+  margin-bottom: .65rem;
+}
+.zoneCardLabel {
+  font-size: .58rem; color: var(--text3);
+  text-transform: uppercase; letter-spacing: .06em;
+  margin-bottom: .2rem;
+}
+.zoneCardName {
+  font-size: .78rem; font-weight: 700; color: var(--text1);
+}
+.zoneCardStatus {
+  font-size: .62rem; color: var(--green);
+  margin-top: 2px;
+  display: flex; align-items: center; gap: 4px;
+}
+.zoneStatusDot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--green); display: inline-block;
+}
+
+/* Sidebar sign-out row */
+.sidebarSignOut {
+  display: flex; align-items: center; justify-content: center;
+  padding: .6rem; border-radius: 10px; cursor: pointer;
+  font-weight: 600;
+  color: rgba(248,113,113,0.7);
+  background: rgba(248,113,113,0.07);
+  border: 1px solid rgba(248,113,113,0.15);
+  transition: all .18s;
+}
+.sidebarSignOut:hover {
+  background: rgba(248,113,113,0.14);
+  color: var(--dash-red);
+}
+
+/* ── Main content area ──────────────────────────────────────────── */
+.content {
+  padding-top: var(--nav-h);
+  padding-bottom: 80px;
+  transition: padding-left .22s cubic-bezier(.4,0,.2,1);
+}
+
+.contentInner {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* ── Card (Dashboard page) ──────────────────────────────────────── */
+.card {
+  background: var(--dash-surface);
+  border: 1px solid var(--dash-border);
+  border-radius: 18px;
+  padding: 1.25rem;
+  position: relative; overflow: hidden;
+  transition: border-color .25s, box-shadow .25s;
+  animation: fadeUp .45s ease both;
+}
+.card::before {
+  content: ''; position: absolute; inset: 0; border-radius: 18px;
+  background: radial-gradient(ellipse 70% 50% at 50% -10%, rgba(245,158,11,0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+.card:hover {
+  border-color: var(--dash-border-active);
+  box-shadow: 0 0 28px rgba(245,158,11,0.06);
+}
+
+/* ── Live ticker bar (PageDashboard) ────────────────────────────── */
+.ticker {
+  display: flex; align-items: center; gap: 1.5rem;
+  background: var(--dash-surface);
+  border: 1px solid var(--dash-border);
+  border-radius: 14px;
+  padding: .6rem 1.25rem;
+  margin-bottom: 1.25rem;
+}
+.tickerLabel {
+  font-size: .62rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .08em;
+  color: var(--text3); flex-shrink: 0;
+}
+.tickerItems {
+  display: flex; gap: 1rem; flex: 1; flex-wrap: wrap;
+}
+.tickerItem {
+  display: flex; align-items: center; gap: 6px;
+  font-size: .72rem; color: var(--text2);
+}
+
+/* ── Map page (PageMap) ─────────────────────────────────────────── */
+.mapWrapper {
+  /* KEY FIX: explicit height using viewport minus nav minus header */
+  height: calc(100vh - var(--nav-h) - 130px);
+  min-height: 520px;
+}
+
+/* ── Smart Advisor strip ─────────────────────────────────────────── */
+.advisorStrip {
+  display: flex; align-items: center; gap: 2rem;
+  background: var(--dash-surface);
+  border: 1px solid var(--dash-border);
+  border-radius: 18px; padding: 1.25rem;
+}
+
+/* ── Alert row (PageAlerts) ─────────────────────────────────────── */
+.alertRow {
+  display: flex; align-items: center; gap: .7rem;
+  padding: .65rem .85rem; border-radius: 12px;
+  background: var(--dash-surface);
+  border: 1px solid rgba(210,165,110,0.08);
+  margin-bottom: .45rem; cursor: pointer; transition: all .18s;
+}
+.alertRow:hover {
+  border-color: var(--dash-border-active);
+  transform: translateX(2px);
+}

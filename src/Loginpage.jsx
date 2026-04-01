@@ -2,7 +2,11 @@
 // Toggled via internal state: mode = 'login' | 'setpassword'
 
 import { useState } from 'react';
+<<<<<<< HEAD
 
+=======
+import styles from './Loginpage.module.css'
+>>>>>>> 351a5d7 (css changes)
 /* ── CITY ILLUSTRATION (right side) ───────────────────────── */
 function CityIllustration() {
   return (

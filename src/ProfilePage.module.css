@@ -1,0 +1,278 @@
+/* ═══════════════════════════════════════════════════════════════════
+   ProfilePage.module.css
+   Tone: Rose Gold & Champagne — refined, personal, premium.
+   Distinct from other pages: warm pink-gold hues, elegant spacing.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Tokens ─────────────────────────────────────────────────────── */
+:root {
+  --prof-accent:   #f0abfc;   /* champagne rose */
+  --prof-accent2:  #e879f9;   /* vivid orchid */
+  --prof-gold:     #fbbf24;   /* warm gold for rank */
+  --prof-glow:     rgba(232,121,249,0.25);
+  --prof-surface:  rgba(255,245,255,0.04);
+  --prof-border:   rgba(240,171,252,0.14);
+  --prof-border2:  rgba(240,171,252,0.28);
+  --prof-green:    #34d399;
+}
+
+/* ── Root ───────────────────────────────────────────────────────── */
+.root {
+  min-height: 100vh;
+  background: radial-gradient(ellipse 80% 60% at 15% 50%, #1a0825 0%, #07050a 55%);
+  font-family: var(--font); color: var(--text1);
+  display: flex; flex-direction: column;
+}
+
+/* ── Nav ────────────────────────────────────────────────────────── */
+.nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.1rem 2.5rem;
+  border-bottom: 1px solid var(--prof-border);
+  background: rgba(7,5,10,0.6); backdrop-filter: blur(20px);
+}
+.navBrand { display: flex; align-items: center; gap: 10px; }
+.navLogo {
+  width: 34px; height: 34px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--prof-accent2), var(--prof-gold));
+  display: flex; align-items: center; justify-content: center; font-size: 1rem;
+  box-shadow: 0 0 16px var(--prof-glow);
+}
+.navBrandText {
+  font-size: 1.05rem; font-weight: 800; letter-spacing: .05em;
+  background: linear-gradient(90deg, var(--text1), var(--prof-accent));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.navBackBtn {
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 14px;
+  background: rgba(255,245,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px; cursor: pointer;
+  font-size: .78rem; font-weight: 600;
+  color: rgba(255,245,255,0.6); font-family: var(--font);
+  transition: all .18s;
+}
+.navBackBtn:hover {
+  background: rgba(232,121,249,0.1);
+  border-color: rgba(232,121,249,0.3);
+  color: var(--prof-accent);
+}
+
+/* ── Body grid ──────────────────────────────────────────────────── */
+.body {
+  flex: 1; display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 2rem; align-items: start;
+  max-width: 1200px; margin: 0 auto; width: 100%;
+  padding: 2rem 2.5rem 3rem;
+}
+
+/* ── Left panel ─────────────────────────────────────────────────── */
+.leftPanel {
+  display: flex; flex-direction: column; gap: 1rem;
+  animation: fadeUp .45s ease both;
+}
+
+/* ── Profile card ───────────────────────────────────────────────── */
+.profileCard {
+  background: var(--prof-surface);
+  border: 1px solid var(--prof-border);
+  border-radius: 20px; padding: 1.5rem;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+.profileCardLabel {
+  font-size: .72rem; font-weight: 700;
+  color: rgba(255,245,255,0.45);
+  text-transform: uppercase; letter-spacing: .08em;
+  margin-bottom: 1.1rem;
+}
+
+/* Avatar row */
+.avatarRow { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; }
+.avatarWrap { position: relative; flex-shrink: 0; }
+.avatar {
+  width: 62px; height: 62px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--prof-accent2), var(--prof-gold));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; font-weight: 800; color: #fff;
+  box-shadow: 0 0 0 3px rgba(232,121,249,0.3), 0 4px 16px rgba(0,0,0,0.3);
+}
+.avatarOnline {
+  position: absolute; bottom: 2px; right: 2px;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--prof-green); border: 2px solid #07050a;
+}
+.avatarName {
+  font-size: 1.2rem; font-weight: 800; color: var(--text1);
+  letter-spacing: -.01em;
+}
+.avatarSub { font-size: .72rem; color: rgba(255,245,255,0.4); margin-top: 2px; }
+
+/* Meta grid (ID / join / rank) */
+.metaGrid {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: .5rem;
+  margin-bottom: 1.25rem;
+}
+.metaCell {
+  background: rgba(255,245,255,0.04);
+  border: 1px solid var(--prof-border);
+  border-radius: 10px; padding: .55rem .65rem;
+}
+.metaCellLabel {
+  font-size: .58rem; color: rgba(255,245,255,0.35);
+  text-transform: uppercase; letter-spacing: .06em; margin-bottom: .2rem;
+}
+.metaCellVal {
+  font-size: .8rem; font-weight: 700; color: var(--text1);
+}
+.metaCellGold { color: var(--prof-gold) !important; }
+
+/* Protection summary */
+.protectionCard {
+  background: rgba(255,245,255,0.03);
+  border: 1px solid var(--prof-border);
+  border-radius: 14px; padding: 1rem;
+  margin-bottom: 1.1rem;
+}
+.protectionTitle {
+  font-size: .72rem; font-weight: 700;
+  color: rgba(255,245,255,0.75); margin-bottom: .75rem;
+}
+.protectionGrid { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; margin-bottom: .75rem; }
+.protectionLabel { font-size: .6rem; color: rgba(255,245,255,0.35); text-transform: uppercase; letter-spacing: .05em; margin-bottom: .2rem; }
+.protectionVal { font-size: .95rem; font-weight: 800; color: var(--text1); font-family: var(--mono); }
+.protectionStatus {
+  font-size: .88rem; font-weight: 700; color: var(--prof-green);
+  display: flex; align-items: center; gap: 5px;
+}
+.protectionDot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--prof-green); box-shadow: 0 0 6px var(--prof-green);
+}
+.protectionBar {
+  height: 6px; background: rgba(255,255,255,0.07); border-radius: 3px; overflow: hidden;
+}
+.protectionFill {
+  height: 100%; width: 88%;
+  background: linear-gradient(90deg, var(--prof-accent2), var(--prof-gold));
+  border-radius: 3px;
+}
+
+/* Linked accounts */
+.linkedCard {
+  background: rgba(255,245,255,0.03);
+  border: 1px solid var(--prof-border);
+  border-radius: 14px; padding: 1rem; margin-bottom: 1.1rem;
+}
+.linkedTitle { font-size: .72rem; font-weight: 700; color: rgba(255,245,255,0.75); margin-bottom: .75rem; }
+.linkedPlatforms { display: flex; gap: .5rem; flex-wrap: wrap; align-items: center; }
+
+/* Action buttons */
+.actionBtns { display: flex; flex-direction: column; gap: .6rem; }
+.primaryBtn {
+  width: 100%; padding: .85rem;
+  background: linear-gradient(135deg, var(--prof-accent) 0%, var(--prof-accent2) 100%);
+  border: none; border-radius: 12px;
+  font-size: .9rem; font-weight: 800;
+  color: #1a0020; cursor: pointer; font-family: var(--font);
+  box-shadow: 0 6px 24px var(--prof-glow);
+  transition: all .2s;
+}
+.primaryBtn:hover { transform: translateY(-1px); box-shadow: 0 10px 32px rgba(232,121,249,0.42); }
+
+.ghostBtn {
+  width: 100%; padding: .85rem;
+  background: rgba(255,245,255,0.04);
+  border: 1.5px solid var(--prof-border);
+  border-radius: 12px; font-size: .9rem; font-weight: 700;
+  color: rgba(255,245,255,0.75); cursor: pointer; font-family: var(--font);
+  transition: all .2s;
+}
+.ghostBtn:hover {
+  border-color: var(--prof-border2);
+  color: var(--text1);
+  background: rgba(232,121,249,0.07);
+}
+
+.footerLinks {
+  display: flex; justify-content: center; gap: 1rem;
+  margin-top: 1rem; font-size: .68rem; color: rgba(255,245,255,0.3);
+}
+.footerLinkItem { cursor: pointer; transition: color .18s; }
+.footerLinkItem:hover { color: rgba(255,245,255,0.65); }
+.footerLinkDanger { cursor: pointer; color: rgba(248,113,113,0.6); transition: color .18s; }
+.footerLinkDanger:hover { color: #f87171; }
+
+/* ── Right panel ────────────────────────────────────────────────── */
+.rightPanel {
+  display: flex; flex-direction: column; gap: 1rem;
+  animation: fadeIn .55s ease .1s both;
+}
+
+/* Illustration */
+.illustrationWrap {
+  position: relative; height: 320px; border-radius: 24px; overflow: hidden;
+  background: radial-gradient(ellipse 90% 80% at 60% 45%, rgba(232,121,249,0.18) 0%, rgba(251,191,36,0.06) 50%, transparent 75%);
+}
+
+/* Bank details card */
+.bankCard {
+  background: var(--prof-surface);
+  border: 1px solid var(--prof-border);
+  border-radius: 18px; padding: 1.25rem;
+  backdrop-filter: blur(20px);
+}
+.bankCardTitle { font-size: .78rem; font-weight: 700; color: rgba(255,245,255,0.8); margin-bottom: 1rem; }
+.bankRows { display: flex; flex-direction: column; gap: .65rem; }
+.bankRow {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: .5rem .65rem;
+  background: rgba(255,245,255,0.03);
+  border: 1px solid rgba(240,171,252,0.08);
+  border-radius: 10px;
+}
+.bankRowLabel { font-size: .65rem; color: rgba(255,245,255,0.4); margin-bottom: .1rem; }
+.bankRowSub { font-size: .58rem; color: rgba(255,245,255,0.3); }
+.bankRowVal { font-size: .78rem; font-weight: 600; color: rgba(255,245,255,0.7); }
+.bankRowMono { font-family: var(--mono); }
+.bankRowGreen { color: var(--prof-green) !important; }
+
+.bankLinkBtn {
+  width: 100%; margin-top: .85rem; padding: .65rem;
+  background: rgba(232,121,249,0.1);
+  border: 1.5px solid rgba(232,121,249,0.25);
+  border-radius: 10px; font-size: .78rem; font-weight: 700;
+  color: var(--prof-accent); cursor: pointer; font-family: var(--font);
+  transition: all .18s;
+}
+.bankLinkBtn:hover {
+  background: rgba(232,121,249,0.18);
+  border-color: rgba(232,121,249,0.45);
+}
+
+/* Payment history card */
+.historyCard {
+  background: var(--prof-surface);
+  border: 1px solid var(--prof-border);
+  border-radius: 18px; padding: 1.25rem;
+  backdrop-filter: blur(20px);
+}
+.historyTitle { font-size: .78rem; font-weight: 700; color: rgba(255,245,255,0.8); margin-bottom: 1rem; }
+.historyRows { display: flex; flex-direction: column; gap: .55rem; }
+.historyRow {
+  display: flex; align-items: center; gap: .75rem;
+  padding: .6rem .75rem;
+  background: rgba(255,245,255,0.03);
+  border: 1px solid rgba(240,171,252,0.08);
+  border-radius: 10px;
+}
+.historyRowName { font-size: .75rem; font-weight: 600; color: rgba(255,245,255,0.75); }
+.historyRowStatus { font-size: .62rem; color: rgba(255,245,255,0.35); margin-top: 2px; }
+.historyRowStatusVal { color: rgba(255,245,255,0.5); }
+.historyAmt { font-family: var(--mono); font-size: .8rem; font-weight: 700; color: var(--text1); }
+.historyPaid { font-size: .62rem; color: var(--prof-green); display: flex; align-items: center; gap: 3px; justify-content: flex-end; margin-top: 2px; }
+.historyPaidDot { width: 6px; height: 6px; border-radius: 50%; background: var(--prof-green); }
+.historyDate { font-size: .62rem; color: rgba(255,245,255,0.3); font-family: var(--mono); flex-shrink: 0; }

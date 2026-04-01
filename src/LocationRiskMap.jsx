@@ -1,7 +1,11 @@
 // LocationRiskMap.jsx
 // Integrated into ZeroShield Dashboard — matches the existing dark glass aesthetic.
 // Used as the "Map" tab in PageDashboard via Dashboard.jsx.
+<<<<<<< HEAD
 
+=======
+import styles from "./LocationRiskMap.module.css";
+>>>>>>> 351a5d7 (css changes)
 import { useState, useEffect, useRef, useCallback } from "react";
 import axios from "axios";
 import {

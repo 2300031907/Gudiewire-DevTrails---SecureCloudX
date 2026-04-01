@@ -1,0 +1,562 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   LocationRiskMap.module.css
+   ZeroShield Dashboard — Dark Glass Aesthetic
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Design Tokens ─────────────────────────────────────────────────────────
+   All visual constants live here. Swap values to retheme the entire component.
+   ─────────────────────────────────────────────────────────────────────────── */
+:root {
+  /* Surface */
+  --lrm-surface-base:       rgba(255, 255, 255, 0.03);
+  --lrm-surface-overlay:    rgba(5, 10, 20, 0.90);
+  --lrm-surface-input:      rgba(255, 255, 255, 0.05);
+  --lrm-surface-btn:        rgba(59, 130, 246, 0.12);
+  --lrm-surface-btn-hover:  rgba(59, 130, 246, 0.22);
+
+  /* Borders */
+  --lrm-border-default:     rgba(99, 160, 255, 0.10);
+  --lrm-border-input:       rgba(99, 160, 255, 0.15);
+  --lrm-border-input-focus: rgba(59, 130, 246, 0.50);
+  --lrm-border-btn:         rgba(59, 130, 246, 0.25);
+  --lrm-border-section:     rgba(99, 160, 255, 0.08);
+
+  /* Text */
+  --lrm-text-primary:   #f0f6ff;
+  --lrm-text-muted:     rgba(120, 150, 190, 0.80);
+  --lrm-text-label:     rgba(99, 160, 255, 0.50);
+  --lrm-text-btn:       #60a5fa;
+
+  /* Status colours */
+  --lrm-safe:           #10b981;
+  --lrm-moderate:       #f59e0b;
+  --lrm-high:           #ef4444;
+
+  /* Metric accent colours */
+  --lrm-accent-rain:    #3b82f6;
+  --lrm-accent-wind:    #a78bfa;
+  --lrm-accent-humid:   #22d3ee;
+  --lrm-accent-aqi:     #22d3ee;
+  --lrm-accent-temp:    #f97316;
+
+  /* Score colours */
+  --lrm-score-good:     #10b981;
+  --lrm-score-fair:     #f59e0b;
+  --lrm-score-poor:     #ef4444;
+
+  /* Layout */
+  --lrm-panel-width:    300px;
+  --lrm-gap:            14px;
+  --lrm-radius-card:    14px;
+  --lrm-radius-inner:   9px;
+  --lrm-radius-route:   12px;
+  --lrm-radius-pill:    20px;
+
+  /* Type scale */
+  --lrm-font-mono:      ui-monospace, 'Cascadia Code', 'Fira Code', monospace;
+  --lrm-font-sans:      inherit;
+  --lrm-size-label:     10px;
+  --lrm-size-meta:      11px;
+  --lrm-size-body:      12px;
+  --lrm-size-input:     13px;
+  --lrm-size-city:      14px;
+  --lrm-size-temp:      26px;
+
+  /* Motion */
+  --lrm-ease:           cubic-bezier(0.22, 1, 0.36, 1);
+  --lrm-duration-fast:  0.18s;
+  --lrm-duration-base:  0.35s;
+  --lrm-duration-bar:   0.80s;
+  --lrm-duration-score: 1.00s;
+  --lrm-duration-spin:  0.80s;
+  --lrm-duration-fly:   1.20s;
+  --lrm-duration-pulse: 1.50s;
+}
+
+
+/* ── Keyframes ─────────────────────────────────────────────────────────────── */
+@keyframes lrm-fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+@keyframes lrm-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes lrm-pulse-dot {
+  0%, 100% { opacity: 1;   transform: scale(1);    }
+  50%       { opacity: 0.5; transform: scale(1.25); }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   LAYOUT
+═══════════════════════════════════════════════════════════════════════════ */
+
+/* Root flex container */
+.root {
+  display: flex;
+  gap: var(--lrm-gap);
+  height: 100%;
+  min-height: 560px;
+}
+
+/* ── Left panel ──────────────────────────────────────────────────────────── */
+.leftPanel {
+  width: var(--lrm-panel-width);
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  padding-right: 2px;
+
+  /* Thin scrollbar to keep the glass look */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(99, 160, 255, 0.18) transparent;
+}
+.leftPanel::-webkit-scrollbar         { width: 4px; }
+.leftPanel::-webkit-scrollbar-track   { background: transparent; }
+.leftPanel::-webkit-scrollbar-thumb   { background: rgba(99, 160, 255, 0.18); border-radius: 2px; }
+
+/* ── Right panel (map) ───────────────────────────────────────────────────── */
+.mapPanel {
+  flex: 1;
+  position: relative;
+  border-radius: var(--lrm-radius-card);
+  overflow: hidden;
+  min-height: 500px;
+  border: 1px solid var(--lrm-border-default);
+}
+
+.mapContainer {
+  width: 100%;
+  height: 100%;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SHARED CARD
+═══════════════════════════════════════════════════════════════════════════ */
+.card {
+  background: var(--lrm-surface-base);
+  border: 1px solid var(--lrm-border-default);
+  border-radius: var(--lrm-radius-card);
+  padding: 14px 16px;
+}
+
+/* Animation variant — applied to cards that appear after data loads */
+.cardAnimated {
+  animation: lrm-fade-up var(--lrm-duration-base) var(--lrm-ease) both;
+}
+
+
+/* ── Section label (uppercase micro-label) ───────────────────────────────── */
+.sectionLabel {
+  font-size: var(--lrm-size-label);
+  color: var(--lrm-text-label);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SEARCH CARD
+═══════════════════════════════════════════════════════════════════════════ */
+.searchRow {
+  display: flex;
+  gap: 7px;
+}
+
+.searchInput {
+  flex: 1;
+  background: var(--lrm-surface-input);
+  border: 1px solid var(--lrm-border-input);
+  border-radius: var(--lrm-radius-inner);
+  padding: 8px 12px;
+  color: var(--lrm-text-primary);
+  font-size: var(--lrm-size-input);
+  font-family: var(--lrm-font-sans);
+  outline: none;
+  transition: border-color var(--lrm-duration-fast);
+}
+.searchInput:focus {
+  border-color: var(--lrm-border-input-focus);
+}
+.searchInput::placeholder {
+  color: rgba(120, 150, 190, 0.45);
+}
+
+.searchBtn {
+  background: var(--lrm-surface-btn);
+  border: 1px solid var(--lrm-border-btn);
+  border-radius: var(--lrm-radius-inner);
+  color: var(--lrm-text-btn);
+  font-size: var(--lrm-size-input);
+  padding: 8px 13px;
+  cursor: pointer;
+  font-weight: 700;
+  font-family: var(--lrm-font-sans);
+  transition: background var(--lrm-duration-fast);
+  white-space: nowrap;
+}
+.searchBtn:hover:not(:disabled) {
+  background: var(--lrm-surface-btn-hover);
+}
+.searchBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.errorMsg {
+  color: var(--lrm-high);
+  font-size: var(--lrm-size-body);
+  margin-top: 7px;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   WEATHER CARD
+═══════════════════════════════════════════════════════════════════════════ */
+.weatherHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.weatherCity {
+  font-size: var(--lrm-size-city);
+  font-weight: 700;
+  color: var(--lrm-text-primary);
+  line-height: 1.2;
+}
+.weatherDesc {
+  font-size: var(--lrm-size-meta);
+  color: var(--lrm-text-muted);
+  margin-top: 2px;
+}
+
+.tempBlock {
+  text-align: right;
+}
+.tempValue {
+  font-family: var(--lrm-font-mono);
+  font-size: var(--lrm-size-temp);
+  font-weight: 700;
+  color: var(--lrm-text-primary);
+  line-height: 1;
+}
+.tempUnit {
+  font-size: var(--lrm-size-label);
+  color: var(--lrm-text-muted);
+}
+
+.aqiRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 6px;
+}
+.aqiRowLabel {
+  font-size: var(--lrm-size-meta);
+  color: var(--lrm-text-muted);
+}
+.aqiValue {
+  font-size: var(--lrm-size-meta);
+  font-weight: 700;
+  font-family: var(--lrm-font-mono);
+  /* colour is set inline since it's data-driven */
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MINI BAR (reusable metric bar)
+═══════════════════════════════════════════════════════════════════════════ */
+.miniBar {
+  margin-bottom: 8px;
+}
+.miniBarHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 3px;
+}
+.miniBarLabel {
+  font-size: var(--lrm-size-meta);
+  color: var(--lrm-text-muted);
+}
+.miniBarValue {
+  font-size: var(--lrm-size-meta);
+  color: var(--lrm-text-primary);
+  font-family: var(--lrm-font-mono);
+  font-weight: 600;
+}
+.miniBarTrack {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.miniBarFill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width var(--lrm-duration-bar) var(--lrm-ease);
+  /* width + background are set inline (data-driven) */
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SAFETY BADGE CARD
+═══════════════════════════════════════════════════════════════════════════ */
+.safetyHeader {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 6px;
+}
+.safetyDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: lrm-pulse-dot var(--lrm-duration-pulse) infinite;
+  /* background + box-shadow are data-driven → set inline */
+}
+.safetyStatus {
+  font-size: var(--lrm-size-meta);
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  /* colour is data-driven → set inline */
+}
+.safetyRec {
+  font-size: var(--lrm-size-body);
+  color: rgba(240, 246, 255, 0.55);
+  line-height: 1.55;
+  font-style: italic;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   AI SCORE CARD
+═══════════════════════════════════════════════════════════════════════════ */
+.scoreRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.scorePill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: var(--lrm-radius-pill);
+  font-size: var(--lrm-size-meta);
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  margin-bottom: 6px;
+  /* background, border, colour → data-driven, set inline */
+}
+.scorePillDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  /* background → data-driven, set inline */
+}
+.scoreMeta {
+  font-size: var(--lrm-size-meta);
+  color: var(--lrm-text-muted);
+  line-height: 1.5;
+}
+
+/* Divider before impact bars */
+.scoreBreakdown {
+  border-top: 1px solid var(--lrm-border-default);
+  padding-top: 10px;
+}
+
+/* CircularScore SVG — no extra wrapper styles needed;
+   the svg itself is self-contained. */
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MAP OVERLAYS
+═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Route summary card (bottom-right of map) ────────────────────────────── */
+.routeCard {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  z-index: 1000;
+  background: var(--lrm-surface-overlay);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--lrm-border-input);
+  border-radius: var(--lrm-radius-route);
+  padding: 12px 16px;
+  min-width: 190px;
+}
+.routeLabel {
+  font-size: var(--lrm-size-label);
+  color: var(--lrm-text-label);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 9px;
+  font-weight: 700;
+}
+.routeRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  border-top: 1px solid var(--lrm-border-section);
+  font-size: var(--lrm-size-body);
+}
+.routeRowKey {
+  color: rgba(180, 200, 230, 0.70);
+}
+.routeRowVal {
+  font-weight: 700;
+  font-family: var(--lrm-font-mono);
+  font-size: var(--lrm-size-body);
+  /* colour → data-driven, set inline */
+}
+
+
+/* ── Loading overlay ─────────────────────────────────────────────────────── */
+.loadingOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(5, 10, 20, 0.65);
+  z-index: 999;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.loadingContent {
+  color: var(--lrm-text-btn);
+  font-size: var(--lrm-size-input);
+  font-family: var(--lrm-font-mono);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(96, 165, 250, 0.20);
+  border-top-color: #60a5fa;
+  border-radius: 50%;
+  animation: lrm-spin var(--lrm-duration-spin) linear infinite;
+}
+
+
+/* ── Empty state ─────────────────────────────────────────────────────────── */
+.emptyState {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 900;
+}
+.emptyIcon {
+  font-size: 32px;
+  margin-bottom: 8px;
+  opacity: 0.20;
+}
+.emptyText {
+  font-size: var(--lrm-size-input);
+  color: rgba(120, 150, 190, 0.38);
+  font-family: var(--lrm-font-mono);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   LEAFLET OVERRIDES
+   Scope to .mapPanel so we don't pollute global Leaflet styles
+═══════════════════════════════════════════════════════════════════════════ */
+.mapPanel :global(.leaflet-container) {
+  background: #05080f;   /* match dashboard bg if tiles haven't loaded */
+}
+.mapPanel :global(.leaflet-popup-content-wrapper) {
+  background: var(--lrm-surface-overlay);
+  border: 1px solid var(--lrm-border-default);
+  border-radius: 10px;
+  color: var(--lrm-text-primary);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.50);
+}
+.mapPanel :global(.leaflet-popup-tip) {
+  background: var(--lrm-surface-overlay);
+}
+.mapPanel :global(.leaflet-popup-close-button) {
+  color: var(--lrm-text-muted) !important;
+}
+.mapPanel :global(.leaflet-popup-close-button:hover) {
+  color: var(--lrm-text-primary) !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   STATUS-SPECIFIC CARD THEMES
+   Apply these to .card to get the coloured safety badge variants.
+   (background + border are set inline in the component since they depend
+    on runtime safety state — these classes are optional convenience helpers
+    if you want to derive them statically.)
+═══════════════════════════════════════════════════════════════════════════ */
+.cardSafe {
+  background: rgba(16, 185, 129, 0.10);
+  border-color: rgba(16, 185, 129, 0.25);
+}
+.cardModerate {
+  background: rgba(245, 158, 11, 0.10);
+  border-color: rgba(245, 158, 11, 0.25);
+}
+.cardHighRisk {
+  background: rgba(239, 68, 68, 0.10);
+  border-color: rgba(239, 68, 68, 0.25);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE — narrow viewports (tablet portrait, mobile)
+═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .root {
+    flex-direction: column;
+    height: auto;
+    min-height: unset;
+  }
+  .leftPanel {
+    width: 100%;
+    min-width: unset;
+    max-height: 60vh;
+  }
+  .mapPanel {
+    min-height: 340px;
+  }
+  .routeCard {
+    bottom: 8px;
+    right: 8px;
+    min-width: 160px;
+    padding: 10px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .searchRow {
+    flex-direction: column;
+  }
+  .searchBtn {
+    width: 100%;
+  }
+}
