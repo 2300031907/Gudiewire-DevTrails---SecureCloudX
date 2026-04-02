@@ -1,16 +1,9 @@
 // Screen1Landing.jsx
-<<<<<<< HEAD
-// State A: Open preview dashboard (Image 1) — widgets visible with demo data
-// State B: Modal overlay (Image 2) — same dashboard dimmed, centered modal with X to close
-
-import { useState } from 'react';
-=======
 // State A: Open preview dashboard (showModal=false) — widgets visible with demo data
 // State B: Modal overlay (showModal=true) — same dashboard dimmed, centered modal with X to close
 
 import { useState } from 'react';
 import styles from './Screen1Landing.module.css';
->>>>>>> 351a5d7 (css changes)
 
 /* ══════════════════════════════════════════════
    SHARED MINI-COMPONENTS
@@ -41,18 +34,10 @@ function GaugeMini({ label = 'MEDIUM', pct = 0.55 }) {
           stroke={s.color} strokeWidth="11" strokeLinecap="round"
           opacity={i === 1 ? 1 : 0.45} />
       ))}
-<<<<<<< HEAD
-      {/* Needle glow */}
-=======
->>>>>>> 351a5d7 (css changes)
       <line x1={cx} y1={cy} x2={nx} y2={ny} stroke="rgba(240,246,255,0.15)" strokeWidth="6" strokeLinecap="round" />
       <line x1={cx} y1={cy} x2={nx} y2={ny} stroke="rgba(240,246,255,0.9)" strokeWidth="2.5" strokeLinecap="round" filter="url(#glow)" />
       <circle cx={cx} cy={cy} r="5.5" fill="rgba(240,246,255,0.9)" />
       <circle cx={cx} cy={cy} r="2.5" fill="#0c1528" />
-<<<<<<< HEAD
-      {/* Label arc text area */}
-=======
->>>>>>> 351a5d7 (css changes)
       <text x={cx + 18} y={cy - 22} textAnchor="middle"
         fill="#f59e0b" fontSize="8.5" fontFamily="Sora,sans-serif" fontWeight="800" letterSpacing="1">
         {label}
@@ -102,33 +87,16 @@ function HeatmapCard() {
           </radialGradient>
         </defs>
         <rect width="340" height="150" fill="#0c1c2e" />
-<<<<<<< HEAD
-        {/* Grid pattern */}
-        {[34,68,102,136,170,204,238,272,306].map(x => <line key={x} x1={x} y1="0" x2={x} y2="150" stroke="rgba(255,255,255,0.04)" strokeWidth="1" />)}
-        {[30,60,90,120].map(y => <line key={y} x1="0" y1={y} x2="340" y2={y} stroke="rgba(255,255,255,0.04)" strokeWidth="1" />)}
-        {/* Roads */}
-        <path d="M0 75 Q85 48 170 75 Q255 102 340 75" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="2.5" />
-        <path d="M170 0 Q185 75 170 150" fill="none" stroke="rgba(255,255,255,0.07)" strokeWidth="1.5" />
-        {/* Heat zones */}
-        <rect width="340" height="150" fill="url(#hm1)" />
-        <rect width="340" height="150" fill="url(#hm2)" />
-        {/* Active zone blocks */}
-=======
         {[34,68,102,136,170,204,238,272,306].map(x => <line key={x} x1={x} y1="0" x2={x} y2="150" stroke="rgba(255,255,255,0.04)" strokeWidth="1" />)}
         {[30,60,90,120].map(y => <line key={y} x1="0" y1={y} x2="340" y2={y} stroke="rgba(255,255,255,0.04)" strokeWidth="1" />)}
         <path d="M0 75 Q85 48 170 75 Q255 102 340 75" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="2.5" />
         <path d="M170 0 Q185 75 170 150" fill="none" stroke="rgba(255,255,255,0.07)" strokeWidth="1.5" />
         <rect width="340" height="150" fill="url(#hm1)" />
         <rect width="340" height="150" fill="url(#hm2)" />
->>>>>>> 351a5d7 (css changes)
         {[[155,62,22,18],[175,75,18,15],[138,75,16,14],[165,55,14,12]].map(([x,y,w,h],i) => (
           <rect key={i} x={x} y={y} width={w} height={h} rx="3"
             fill={`rgba(249,115,22,${0.35 + i * 0.1})`} stroke="rgba(251,191,36,0.3)" strokeWidth=".5" />
         ))}
-<<<<<<< HEAD
-        {/* Rider dots */}
-=======
->>>>>>> 351a5d7 (css changes)
         {[[168,70],[148,80],[182,62],[140,90]].map(([x,y],i) => (
           <circle key={i} cx={x} cy={y} r="3" fill="#22d3ee" opacity=".85"
             style={{ filter: 'drop-shadow(0 0 4px #22d3ee)' }} />
@@ -143,21 +111,7 @@ function HeatmapCard() {
 ══════════════════════════════════════════════ */
 function Card({ children, style = {}, locked = false }) {
   return (
-<<<<<<< HEAD
-    <div style={{
-      background: 'rgba(255,255,255,0.035)',
-      border: `1px solid rgba(99,160,255,${locked ? '0.08' : '0.13'})`,
-      borderRadius: 18,
-      padding: '1.25rem',
-      backdropFilter: 'blur(12px)',
-      position: 'relative',
-      overflow: 'hidden',
-      transition: 'border-color .2s',
-      ...style,
-    }}>
-=======
     <div className={`${styles.card} ${locked ? styles.cardLocked : styles.cardNormal}`} style={style}>
->>>>>>> 351a5d7 (css changes)
       {children}
     </div>
   );
@@ -165,47 +119,14 @@ function Card({ children, style = {}, locked = false }) {
 
 function CardTitle({ icon, children }) {
   return (
-<<<<<<< HEAD
-    <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: '.75rem' }}>
-      {icon && <span style={{ fontSize: '.95rem', opacity: .65 }}>{icon}</span>}
-      <span style={{ fontSize: '.82rem', fontWeight: 600, color: 'rgba(240,246,255,0.75)', fontFamily: 'Sora, sans-serif' }}>{children}</span>
-=======
     <div className={styles.cardTitle}>
       {icon && <span className={styles.cardTitleIcon}>{icon}</span>}
       <span className={styles.cardTitleText}>{children}</span>
->>>>>>> 351a5d7 (css changes)
     </div>
   );
 }
 
 /* ══════════════════════════════════════════════
-<<<<<<< HEAD
-   LOCKED WIDGET (Image 2 state)
-══════════════════════════════════════════════ */
-function LockedWidget({ title, icon, children, style = {} }) {
-  return (
-    <div style={{
-      background: 'rgba(255,255,255,0.025)',
-      border: '1px solid rgba(99,160,255,0.07)',
-      borderRadius: 18,
-      overflow: 'hidden',
-      position: 'relative',
-      ...style,
-    }}>
-      <div style={{ padding: '1rem 1.25rem .5rem', display: 'flex', alignItems: 'center', gap: 6 }}>
-        <span style={{ fontSize: '.85rem', opacity: .4 }}>🔒</span>
-        <span style={{ fontSize: '.78rem', fontWeight: 600, color: 'rgba(240,246,255,0.35)', fontFamily: 'Sora, sans-serif' }}>{title}</span>
-      </div>
-      <div style={{ padding: '0 1.25rem', filter: 'blur(4px)', opacity: .25, pointerEvents: 'none' }}>
-        {children}
-      </div>
-      <div style={{
-        padding: '.5rem 1.25rem .9rem',
-        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5,
-        fontSize: '.68rem', color: 'rgba(240,246,255,0.25)', fontFamily: 'Sora, sans-serif',
-        marginTop: '.25rem',
-      }}>
-=======
    LOCKED WIDGET
 ══════════════════════════════════════════════ */
 function LockedWidget({ title, children, style = {} }) {
@@ -219,7 +140,6 @@ function LockedWidget({ title, children, style = {} }) {
         {children}
       </div>
       <div className={styles.lockedFooter}>
->>>>>>> 351a5d7 (css changes)
         🔒 Login required
       </div>
     </div>
@@ -230,49 +150,6 @@ function LockedWidget({ title, children, style = {} }) {
    MAIN COMPONENT
 ══════════════════════════════════════════════ */
 export default function Screen1Landing({ onGetStarted, onSignIn }) {
-<<<<<<< HEAD
-  const [showModal, setShowModal] = useState(true); // false = Image 1, true = Image 2
-
-  return (
-    <div style={{ minHeight: '100vh', paddingTop: 62, paddingBottom: 64, position: 'relative', fontFamily: 'Sora, sans-serif' }}>
-
-      {/* ═══ TOP NAV ═══ */}
-      <nav style={{
-        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 300,
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        padding: '0 2.5rem', height: 62,
-        background: 'rgba(5,10,20,0.88)', backdropFilter: 'blur(24px)',
-        borderBottom: '1px solid rgba(99,160,255,0.1)',
-      }}>
-        {/* Brand */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <div style={{
-            width: 34, height: 34, borderRadius: 10,
-            background: 'linear-gradient(135deg, #3b82f6, #22d3ee)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: '1rem', boxShadow: '0 0 18px rgba(59,130,246,0.4)',
-          }}>🛡️</div>
-          <span style={{
-            fontSize: '1.05rem', fontWeight: 800, letterSpacing: '.05em',
-            background: 'linear-gradient(90deg, #f0f6ff, #22d3ee)',
-            WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-          }}>ZEROSHIELD</span>
-        </div>
-
-        {/* Nav links */}
-        <div style={{ display: 'flex', gap: 2 }}>
-          {['Coverage', 'Alerts', 'GigScore', 'Pricing'].map((l, i) => (
-            <a key={l} href="#" style={{
-              padding: '.42rem 1.05rem',
-              fontSize: '.84rem', fontWeight: 500, textDecoration: 'none',
-              color: i === 0 ? '#f0f6ff' : 'rgba(240,246,255,0.5)',
-              borderBottom: i === 0 ? '2px solid #3b82f6' : '2px solid transparent',
-              borderRadius: i === 0 ? '8px 8px 0 0' : '8px',
-              transition: 'all .18s',
-            }}
-            onMouseEnter={e => { if (i !== 0) e.currentTarget.style.color = '#f0f6ff'; }}
-            onMouseLeave={e => { if (i !== 0) e.currentTarget.style.color = 'rgba(240,246,255,0.5)'; }}>
-=======
   const [showModal, setShowModal] = useState(true);
 
   return (
@@ -287,55 +164,19 @@ export default function Screen1Landing({ onGetStarted, onSignIn }) {
 
         <div className={styles.navLinks}>
           {['Coverage', 'Alerts', 'GigScore', 'Pricing'].map((l, i) => (
-            <a
-              key={l}
-              href="#"
-              className={`${styles.navLink} ${i === 0 ? styles.navLinkActive : styles.navLinkDefault}`}
-            >
->>>>>>> 351a5d7 (css changes)
+            <a key={l} href="#"
+              className={`${styles.navLink} ${i === 0 ? styles.navLinkActive : styles.navLinkDefault}`}>
               {l}
             </a>
           ))}
         </div>
 
-<<<<<<< HEAD
-        {/* Sign In button */}
-        <button onClick={onSignIn} style={{
-          display: 'flex', alignItems: 'center', gap: 9,
-          padding: '.6rem 1.6rem',
-          background: 'rgba(255,255,255,0.06)',
-          border: '1.5px solid rgba(240,246,255,0.22)',
-          borderRadius: 50, cursor: 'pointer',
-          fontSize: '.88rem', fontWeight: 700,
-          color: '#f0f6ff', fontFamily: 'Sora, sans-serif',
-          transition: 'all .2s',
-          boxShadow: '0 2px 12px rgba(0,0,0,0.3)',
-        }}
-        onMouseEnter={e => { e.currentTarget.style.background = 'rgba(59,130,246,0.18)'; e.currentTarget.style.borderColor = 'rgba(59,130,246,0.5)'; }}
-        onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.borderColor = 'rgba(240,246,255,0.22)'; }}>
-=======
         <button onClick={onSignIn} className={styles.navSignIn}>
->>>>>>> 351a5d7 (css changes)
           <span style={{ fontSize: '1rem' }}>👤</span>
           Sign In
         </button>
       </nav>
 
-<<<<<<< HEAD
-      {/* ═══ HERO HEADLINE (Image 1 state only) ═══ */}
-      {!showModal && (
-        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '2rem 2.5rem 1.25rem' }}>
-          <h1 style={{
-            fontSize: '2.2rem', fontWeight: 800, letterSpacing: '-.025em', lineHeight: 1.2,
-            marginBottom: '.5rem',
-          }}>
-            <span style={{ background: 'linear-gradient(90deg, #f0f6ff, #60a5fa)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-              AI-powered income
-            </span>
-            <span style={{ color: 'rgba(240,246,255,0.7)', fontWeight: 400 }}> protection preview for delivery partners</span>
-          </h1>
-          <p style={{ fontSize: '.88rem', color: 'rgba(240,246,255,0.45)', fontWeight: 400 }}>
-=======
       {/* ═══ HERO HEADLINE (open state only) ═══ */}
       {!showModal && (
         <div className={styles.hero}>
@@ -344,28 +185,13 @@ export default function Screen1Landing({ onGetStarted, onSignIn }) {
             <span style={{ color: 'rgba(240,246,255,0.7)', fontWeight: 400 }}> protection preview for delivery partners</span>
           </h1>
           <p className={styles.heroSub}>
->>>>>>> 351a5d7 (css changes)
             Explore how ZeroShield predicts weather risks and protects your earnings
           </p>
         </div>
       )}
 
       {/* ═══ DASHBOARD GRID ═══ */}
-<<<<<<< HEAD
-      <div style={{
-        maxWidth: 1280, margin: '0 auto',
-        padding: showModal ? '1.75rem 2.5rem' : '1rem 2.5rem',
-        display: 'grid',
-        gridTemplateColumns: '1fr 1.35fr 1fr',
-        gridTemplateRows: 'auto auto auto',
-        gap: '1rem',
-        filter: showModal ? 'brightness(0.55) blur(1px)' : 'none',
-        transition: 'filter .3s ease',
-        pointerEvents: showModal ? 'none' : 'auto',
-      }}>
-=======
       <div className={`${styles.grid} ${showModal ? styles.gridPaddingModal : styles.gridPaddingNormal} ${showModal ? styles.gridBlurred : ''}`}>
->>>>>>> 351a5d7 (css changes)
 
         {/* ── ROW 1 ── */}
 
@@ -384,20 +210,12 @@ export default function Screen1Landing({ onGetStarted, onSignIn }) {
         }
 
         {/* Weather Disruption */}
-<<<<<<< HEAD
-        <Card style={{ position: 'relative' }}>
-=======
         <Card>
->>>>>>> 351a5d7 (css changes)
           <CardTitle icon="⛈️">{showModal ? 'Weather Alert' : 'Weather Disruption'}</CardTitle>
           <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
             <div style={{ flex: 1 }}>
               <div style={{ fontSize: '.88rem', color: 'rgba(240,246,255,0.75)', marginBottom: '.4rem', lineHeight: 1.5 }}>
-<<<<<<< HEAD
-                {showModal ? 'Heavy rain is expected today.' : 'Heavy rain expected\nbetween 4 PM – 8 PM'}
-=======
                 {showModal ? 'Heavy rain is expected today.' : 'Heavy rain expected between 4 PM – 8 PM'}
->>>>>>> 351a5d7 (css changes)
               </div>
               <div style={{ fontSize: '.78rem', color: 'rgba(240,246,255,0.45)' }}>
                 Income disruption {showModal ? 'probability' : 'risk'}: Medium{showModal ? '.' : ''}
@@ -409,11 +227,7 @@ export default function Screen1Landing({ onGetStarted, onSignIn }) {
 
         {/* GigScore */}
         {showModal
-<<<<<<< HEAD
-          ? <LockedWidget title="GigScore" icon="🏆"><div style={{ padding: '.5rem 0' }}><RingScore score={72} /></div></LockedWidget>
-=======
           ? <LockedWidget title="GigScore"><div style={{ padding: '.5rem 0' }}><RingScore score={72} /></div></LockedWidget>
->>>>>>> 351a5d7 (css changes)
           : (
             <Card style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '1.5rem' }}>
               <CardTitle>GigScore</CardTitle>
@@ -463,15 +277,9 @@ export default function Screen1Landing({ onGetStarted, onSignIn }) {
         <Card>
           <CardTitle icon="🔔">Alerts</CardTitle>
           {[
-<<<<<<< HEAD
-            { icon: '🟡', title: 'Storm Warning', time: 'Today 4:00 PM', sub: showModal ? null : 'Heavy rain and flooding expected', dotColor: '#f59e0b', locked: showModal },
-            { icon: '⚠️', title: 'Heat Advisory',  time: showModal ? '11:10' : 'Today 2:00 PM', sub: showModal ? null : 'Extreme heat conditions',  dotColor: '#ef4444', locked: showModal },
-            { icon: '🟢', title: 'Air Quality Alert', time: showModal ? '09:30' : 'Today 9:30 AM', sub: showModal ? null : 'Unhealthy AQI 162', dotColor: '#10b981', locked: showModal },
-=======
             { icon: '🟡', title: 'Storm Warning',    time: 'Today 4:00 PM', sub: 'Heavy rain and flooding expected', dotColor: '#f59e0b' },
             { icon: '⚠️', title: 'Heat Advisory',    time: 'Today 2:00 PM', sub: 'Extreme heat conditions',          dotColor: '#ef4444' },
             { icon: '🟢', title: 'Air Quality Alert', time: 'Today 9:30 AM', sub: 'Unhealthy AQI 162',                dotColor: '#10b981' },
->>>>>>> 351a5d7 (css changes)
           ].map((a, i) => (
             <div key={i} style={{
               display: 'flex', alignItems: showModal ? 'center' : 'flex-start', gap: '.65rem',
@@ -487,42 +295,13 @@ export default function Screen1Landing({ onGetStarted, onSignIn }) {
                   {a.title}
                   <span style={{ fontWeight: 400, color: 'rgba(240,246,255,0.4)', fontSize: '.7rem', marginLeft: 6 }}>{a.time}</span>
                 </div>
-<<<<<<< HEAD
-                {!showModal && a.sub && <div style={{ fontSize: '.68rem', color: 'rgba(240,246,255,0.4)', marginTop: 2 }}>{a.sub}</div>}
-=======
                 {!showModal && <div style={{ fontSize: '.68rem', color: 'rgba(240,246,255,0.4)', marginTop: 2 }}>{a.sub}</div>}
->>>>>>> 351a5d7 (css changes)
               </div>
               {showModal && <span style={{ fontSize: '.62rem', color: 'rgba(240,246,255,0.25)', display: 'flex', alignItems: 'center', gap: 3 }}>🔒 Locked</span>}
             </div>
           ))}
         </Card>
 
-<<<<<<< HEAD
-        {/* ── ROW 3 — Sign in CTA bar (Image 1 only) ── */}
-        {!showModal && (
-          <div style={{
-            gridColumn: '1 / 3',
-            background: 'rgba(255,255,255,0.03)',
-            border: '1px solid rgba(99,160,255,0.1)',
-            borderRadius: 18, padding: '1.15rem 1.75rem',
-            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          }}>
-            <span style={{ fontSize: '.92rem', color: 'rgba(240,246,255,0.65)', fontWeight: 400 }}>
-              Sign in to activate your personalized protection dashboard
-            </span>
-            <button onClick={onSignIn} style={{
-              padding: '.65rem 1.75rem', borderRadius: 50,
-              background: 'linear-gradient(135deg, #22d3ee, #3b82f6)',
-              border: 'none', cursor: 'pointer',
-              fontSize: '.88rem', fontWeight: 700, color: '#020d1a',
-              fontFamily: 'Sora, sans-serif', flexShrink: 0,
-              boxShadow: '0 4px 20px rgba(34,211,238,0.3)',
-              transition: 'all .2s',
-            }}
-            onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-1px)'}
-            onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}>
-=======
         {/* ── ROW 3 — Sign in CTA bar (open state only) ── */}
         {!showModal && (
           <div className={styles.ctaBar}>
@@ -530,210 +309,61 @@ export default function Screen1Landing({ onGetStarted, onSignIn }) {
               Sign in to activate your personalized protection dashboard
             </span>
             <button onClick={onSignIn} className={styles.ctaBarBtn}>
->>>>>>> 351a5d7 (css changes)
               Sign In
             </button>
           </div>
         )}
 
-<<<<<<< HEAD
-        {/* Preview toggle button (Image 1 only) */}
-        {!showModal && (
-          <div style={{
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-          }}>
-            <button onClick={() => setShowModal(true)} style={{
-              padding: '.6rem 1.4rem', borderRadius: 12,
-              background: 'rgba(59,130,246,0.08)',
-              border: '1px solid rgba(59,130,246,0.2)',
-              cursor: 'pointer', fontSize: '.72rem', fontWeight: 600,
-              color: 'rgba(240,246,255,0.45)', fontFamily: 'Sora, sans-serif',
-              transition: 'all .2s',
-            }}>
-=======
         {/* Lock preview button (open state only) */}
         {!showModal && (
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <button onClick={() => setShowModal(true)} className={styles.lockBtn}>
->>>>>>> 351a5d7 (css changes)
               🔒 Lock preview
             </button>
           </div>
         )}
-<<<<<<< HEAD
-=======
 
->>>>>>> 351a5d7 (css changes)
       </div>
 
       {/* ═══ MODAL OVERLAY ═══ */}
       {showModal && (
-<<<<<<< HEAD
-        <div style={{
-          position: 'fixed',
-          top: '50%', left: '50%',
-          transform: 'translate(-50%, -50%)',
-          zIndex: 200,
-          width: 560,
-          background: 'linear-gradient(160deg, rgba(8,18,40,0.97) 0%, rgba(5,12,28,0.99) 100%)',
-          border: '1px solid rgba(99,160,255,0.2)',
-          borderRadius: 26,
-          padding: '2.75rem 3rem 2.5rem',
-          backdropFilter: 'blur(40px)',
-          boxShadow: '0 40px 100px rgba(0,0,0,0.75), 0 0 100px rgba(59,130,246,0.07), inset 0 1px 0 rgba(255,255,255,0.05)',
-          textAlign: 'center',
-          animation: 'scaleIn .4s cubic-bezier(.22,.68,0,1.2) both',
-        }}>
-
-          {/* ── X CLOSE BUTTON ── */}
-          <button onClick={() => setShowModal(false)} style={{
-            position: 'absolute', top: '1rem', right: '1rem',
-            width: 34, height: 34,
-            background: 'rgba(255,255,255,0.06)',
-            border: '1px solid rgba(240,246,255,0.12)',
-            borderRadius: '50%', cursor: 'pointer',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: '1rem', color: 'rgba(240,246,255,0.5)',
-            fontFamily: 'Sora, sans-serif', fontWeight: 400,
-            transition: 'all .18s', lineHeight: 1,
-          }}
-          onMouseEnter={e => { e.currentTarget.style.background = 'rgba(239,68,68,0.15)'; e.currentTarget.style.borderColor = 'rgba(239,68,68,0.3)'; e.currentTarget.style.color = '#ef4444'; }}
-          onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.borderColor = 'rgba(240,246,255,0.12)'; e.currentTarget.style.color = 'rgba(240,246,255,0.5)'; }}>
-            ✕
-          </button>
-
-          {/* Ambient glow */}
-          <div style={{
-            position: 'absolute', top: '-80px', left: '50%', transform: 'translateX(-50%)',
-            width: 240, height: 240, borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(34,211,238,0.09) 0%, transparent 70%)',
-            pointerEvents: 'none',
-          }} />
-
-          {/* Floating shield */}
-          <div style={{
-            position: 'absolute', top: '-26px', left: '50%', transform: 'translateX(-50%)',
-            width: 52, height: 52, borderRadius: 15,
-            background: 'linear-gradient(135deg, #3b82f6, #22d3ee)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: '1.5rem',
-            boxShadow: '0 8px 28px rgba(59,130,246,0.45), 0 0 0 5px rgba(5,12,28,0.99)',
-          }}>🛡️</div>
-
-          {/* Headline */}
-          <div style={{ marginTop: '1.5rem', marginBottom: '1rem' }}>
-            <h2 style={{
-              fontSize: '1.5rem', fontWeight: 800, lineHeight: 1.3, marginBottom: '.8rem',
-              letterSpacing: '-.02em',
-              color: '#f0f6ff',
-            }}>
-              Unlock AI-powered<br />income protection insights
-            </h2>
-            <p style={{
-              fontSize: '.82rem', color: 'rgba(240,246,255,0.45)',
-              lineHeight: 1.75, maxWidth: 380, margin: '0 auto',
-            }}>
-=======
         <div className={styles.modal}>
 
-          {/* X Close */}
           <button onClick={() => setShowModal(false)} className={styles.modalClose}>✕</button>
-
-          {/* Ambient glow */}
           <div className={styles.modalGlow} />
-
-          {/* Floating shield */}
           <div className={styles.modalShield}>🛡️</div>
 
-          {/* Headline */}
           <div className={styles.modalHeadline}>
             <h2 className={styles.modalH2}>
               Unlock AI-powered<br />income protection insights
             </h2>
             <p className={styles.modalSub}>
->>>>>>> 351a5d7 (css changes)
               Sign in to personalize your risk prediction, coverage status and payouts dashboard
             </p>
           </div>
 
-          {/* Get Started CTA */}
-<<<<<<< HEAD
-          <button onClick={onGetStarted} style={{
-            width: '100%', padding: '1rem 2rem',
-            background: 'linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%)',
-            border: 'none', borderRadius: 14,
-            fontSize: '.98rem', fontWeight: 800,
-            color: '#020e1f', cursor: 'pointer',
-            fontFamily: 'Sora, sans-serif', letterSpacing: '.02em',
-            boxShadow: '0 6px 32px rgba(34,211,238,0.35)',
-            transition: 'all .2s', marginBottom: '.85rem',
-          }}
-          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 10px 40px rgba(34,211,238,0.45)'; }}
-          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 6px 32px rgba(34,211,238,0.35)'; }}>
-=======
           <button onClick={onGetStarted} className={styles.modalCta}>
->>>>>>> 351a5d7 (css changes)
             Get Started
           </button>
 
-          {/* Sign In link */}
-<<<<<<< HEAD
-          <div style={{ fontSize: '.75rem', color: 'rgba(240,246,255,0.3)', marginBottom: '1.25rem' }}>
-            Already have an account?{' '}
-            <button onClick={onSignIn} style={{
-              background: 'none', border: 'none', cursor: 'pointer',
-              color: '#60a5fa', fontWeight: 700, fontSize: '.75rem',
-              fontFamily: 'Sora, sans-serif',
-              textDecoration: 'underline', textUnderlineOffset: 2,
-            }}>Sign In</button>
-          </div>
-
-          {/* Trust badges */}
-          <div style={{ display: 'flex', gap: '.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            {['⚡ Auto-payouts', '🛡️ Zero claim forms', '🔒 Bank-grade security'].map((b, i) => (
-              <span key={i} style={{
-                padding: '3px 11px', borderRadius: 20, fontSize: '.6rem',
-                background: 'rgba(59,130,246,0.08)', border: '1px solid rgba(59,130,246,0.15)',
-                color: 'rgba(240,246,255,0.35)',
-              }}>{b}</span>
-            ))}
-          </div>
-=======
           <div className={styles.modalSignInRow}>
             Already have an account?{' '}
             <button onClick={onSignIn} className={styles.modalSignInLink}>Sign In</button>
           </div>
 
-          {/* Trust badges */}
           <div className={styles.trustBadges}>
             {['⚡ Auto-payouts', '🛡️ Zero claim forms', '🔒 Bank-grade security'].map((b, i) => (
               <span key={i} className={styles.trustBadge}>{b}</span>
             ))}
           </div>
 
->>>>>>> 351a5d7 (css changes)
         </div>
       )}
 
       {/* ═══ FOOTER ═══ */}
-<<<<<<< HEAD
-      <div style={{
-        position: 'fixed', bottom: 0, left: 0, right: 0,
-        display: 'flex', justifyContent: 'center', gap: '1.75rem',
-        padding: '.85rem', fontSize: '.72rem', color: 'rgba(240,246,255,0.28)',
-        borderTop: '1px solid rgba(99,160,255,0.07)',
-        background: 'rgba(5,10,20,0.75)', backdropFilter: 'blur(12px)',
-        zIndex: 10,
-      }}>
-        {['About', 'Contact', 'Privacy', 'Terms'].map(l => (
-          <a key={l} href="#" style={{ color: 'rgba(240,246,255,0.28)', textDecoration: 'none', transition: 'color .18s', fontFamily: 'Sora, sans-serif' }}
-            onMouseEnter={e => e.currentTarget.style.color = 'rgba(240,246,255,0.65)'}
-            onMouseLeave={e => e.currentTarget.style.color = 'rgba(240,246,255,0.28)'}>{l}</a>
-=======
       <div className={styles.footer}>
         {['About', 'Contact', 'Privacy', 'Terms'].map(l => (
           <a key={l} href="#" className={styles.footerLink}>{l}</a>
->>>>>>> 351a5d7 (css changes)
         ))}
       </div>
     </div>

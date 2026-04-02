@@ -1,25 +1,8 @@
-// Dashboard.jsx — ZeroShield · Full dashboard
-// Changes vs original:
-//  • Top nav: only Sign In/Out · Profile · Settings · Account · Dashboard label
-//  • Left sidebar: collapsible with toggle button (← / →)
-//  • Clicking "Dashboard" in sidebar shows all original dashboard components
-//  • NEW "Map" tab added — renders <LocationRiskMap />
-//  • Content area shifts smoothly when sidebar opens / closes
-<<<<<<< HEAD
-
 import { useState, useEffect } from 'react';
 import LocationRiskMap from './LocationRiskMap';
+import styles from './Dashboard.module.css';
 
-=======
-//  • ✅ Settings ⚙️ button and sidebar Settings item now navigate to Settings page
 
-import { useState, useEffect } from 'react';
-import LocationRiskMap from './LocationRiskMap';
-import styles from './Dashboard.module.css'
->>>>>>> 351a5d7 (css changes)
-/* ═══════════════════════════════════════════════════
-   SHARED PRIMITIVES  (unchanged from original)
-═══════════════════════════════════════════════════ */
 function Card({ children, style = {}, delay = 0 }) {
   return (
     <div style={{
@@ -476,7 +459,6 @@ function PageGigScore({ userData }) {
 
 /* PAGE: PAYOUTS ───────────────────────────────────── */
 function PagePayouts() {
-  const data=[8,10,12,14,16,18,15,13,11,9,7,5];
   return (
     <div>
       <div style={{marginBottom:'1.5rem'}}>
@@ -558,10 +540,6 @@ function PageAdvisor({ userData }) {
 
 /* ═══════════════════════════════════════════════════
    SIDEBAR  (collapsible)
-<<<<<<< HEAD
-=======
-   ✅ CHANGE: onOpenSettings prop added and wired to Settings item
->>>>>>> 351a5d7 (css changes)
 ═══════════════════════════════════════════════════ */
 const NAV_ITEMS = [
   { id:'Dashboard', icon:'⊞',  badge:null },
@@ -573,15 +551,10 @@ const NAV_ITEMS = [
   { id:'Advisor',   icon:'🤖', badge:'AI'  },
 ];
 
-const SIDEBAR_W  = 200;
+const SIDEBAR_W   = 200;
 const SIDEBAR_COL = 60;
 
-<<<<<<< HEAD
-function Sidebar({ active, onChange, onProfile, onSignOut, open, onToggle }) {
-=======
-// ✅ CHANGE: added onOpenSettings to Sidebar props
 function Sidebar({ active, onChange, onProfile, onSignOut, onOpenSettings, open, onToggle }) {
->>>>>>> 351a5d7 (css changes)
   const w = open ? SIDEBAR_W : SIDEBAR_COL;
   return (
     <div style={{
@@ -640,12 +613,8 @@ function Sidebar({ active, onChange, onProfile, onSignOut, onOpenSettings, open,
 
         {/* Account section */}
         {open && <div style={{ fontSize:'.58rem', fontWeight:700, textTransform:'uppercase', letterSpacing:'.1em', color:'rgba(99,160,255,0.4)', padding:'.8rem .75rem .3rem' }}>Account</div>}
-<<<<<<< HEAD
-        {[{icon:'👤',label:'Profile',fn:onProfile},{icon:'⚙️',label:'Settings',fn:null}].map(item=>(
-=======
-        {/* ✅ CHANGE: Settings fn now calls onOpenSettings instead of null */}
+
         {[{icon:'👤',label:'Profile',fn:onProfile},{icon:'⚙️',label:'Settings',fn:onOpenSettings}].map(item=>(
->>>>>>> 351a5d7 (css changes)
           <div key={item.label} onClick={item.fn} title={!open ? item.label : ''} style={{
             display:'flex', alignItems:'center', gap:open ? '.65rem' : 0,
             justifyContent: open ? 'flex-start' : 'center',
@@ -689,16 +658,9 @@ function Sidebar({ active, onChange, onProfile, onSignOut, onOpenSettings, open,
 }
 
 /* ═══════════════════════════════════════════════════
-   DASHBOARD SHELL
-<<<<<<< HEAD
+   MAIN DASHBOARD EXPORT
 ═══════════════════════════════════════════════════ */
-export default function Dashboard({ userData, onSignOut, onOpenProfile }) {
-=======
-   ✅ CHANGE: onOpenSettings added to props and wired to ⚙️ button + Sidebar
-═══════════════════════════════════════════════════ */
-// ✅ CHANGE: added onOpenSettings to destructured props
 export default function Dashboard({ userData, onSignOut, onOpenProfile, onOpenSettings }) {
->>>>>>> 351a5d7 (css changes)
   const [tab,       setTab]       = useState('Dashboard');
   const [time,      setTime]      = useState(new Date());
   const [sideOpen,  setSideOpen]  = useState(true);
@@ -724,11 +686,6 @@ export default function Dashboard({ userData, onSignOut, onOpenProfile, onOpenSe
   return (
     <div style={{ minHeight:'100vh', background:'var(--bg0)' }}>
 
-<<<<<<< HEAD
-      {/* ── TOP NAV — simplified ───────────────────────────────────────────── */}
-=======
-      {/* ── TOP NAV ───────────────────────────────────────────── */}
->>>>>>> 351a5d7 (css changes)
       <nav style={{
         position:'fixed', top:0, left:0, right:0, zIndex:200,
         display:'flex', alignItems:'center', justifyContent:'space-between',
@@ -743,11 +700,6 @@ export default function Dashboard({ userData, onSignOut, onOpenProfile, onOpenSe
           <span style={{ fontSize:'.68rem', color:'rgba(99,160,255,0.45)', marginLeft:4, fontFamily:'var(--mono)' }}>/ {tab}</span>
         </div>
 
-<<<<<<< HEAD
-        {/* Right cluster — only essential actions */}
-=======
-        {/* Right cluster */}
->>>>>>> 351a5d7 (css changes)
         <div style={{ display:'flex', alignItems:'center', gap:8 }}>
 
           {/* Live clock */}
@@ -766,14 +718,8 @@ export default function Dashboard({ userData, onSignOut, onOpenProfile, onOpenSe
             {userData?.name||'My Account'}
           </button>
 
-<<<<<<< HEAD
           {/* Settings */}
-          <button onClick={()=>{}} style={{ width:32,height:32,display:'flex',alignItems:'center',justifyContent:'center',background:'transparent',border:'1px solid rgba(99,160,255,0.12)',borderRadius:9,cursor:'pointer',fontSize:'.9rem',color:'var(--text2)',transition:'all .18s' }}
-=======
-          {/* ✅ CHANGE: Settings ⚙️ button now calls onOpenSettings */}
-          <button onClick={onOpenSettings} style={{ width:32,height:32,display:'flex',alignItems:'center',justifyContent:'center',background:'transparent',border:'1px solid rgba(99,160,255,0.12)',borderRadius:9,cursor:'pointer',fontSize:'.9rem',color:'var(--text2)',transition:'all .18s' }}
->>>>>>> 351a5d7 (css changes)
-            title="Settings"
+          <button onClick={onOpenSettings} title="Settings" style={{ width:32,height:32,display:'flex',alignItems:'center',justifyContent:'center',background:'transparent',border:'1px solid rgba(99,160,255,0.12)',borderRadius:9,cursor:'pointer',fontSize:'.9rem',color:'var(--text2)',transition:'all .18s' }}
             onMouseEnter={e=>{ e.currentTarget.style.borderColor='rgba(99,160,255,0.28)'; e.currentTarget.style.background='rgba(59,130,246,0.07)'; }}
             onMouseLeave={e=>{ e.currentTarget.style.borderColor='rgba(99,160,255,0.12)'; e.currentTarget.style.background='transparent'; }}>
             ⚙️
@@ -789,19 +735,12 @@ export default function Dashboard({ userData, onSignOut, onOpenProfile, onOpenSe
       </nav>
 
       {/* ── COLLAPSIBLE SIDEBAR ────────────────────────────────────────────── */}
-<<<<<<< HEAD
-=======
-      {/* ✅ CHANGE: onOpenSettings passed down to Sidebar */}
->>>>>>> 351a5d7 (css changes)
       <Sidebar
         active={tab}
         onChange={setTab}
         onProfile={onOpenProfile}
         onSignOut={onSignOut}
-<<<<<<< HEAD
-=======
         onOpenSettings={onOpenSettings}
->>>>>>> 351a5d7 (css changes)
         open={sideOpen}
         onToggle={() => setSideOpen(o => !o)}
       />

@@ -1,10 +1,6 @@
 // OnboardingSteps.jsx — Steps 1–5 (mobile, OTP, profile, platforms, bank)
 import { useState, useRef, useEffect } from 'react';
-<<<<<<< HEAD
-
-=======
-import styles from './OnboardingSteps.module.css'
->>>>>>> 351a5d7 (css changes)
+import styles from './OnboardingSteps.module.css';
 /* ── STEP WRAPPER ─────────────────────────────────────────── */
 function StepShell({ step, total, title, subtitle, illustration, children }) {
   return (

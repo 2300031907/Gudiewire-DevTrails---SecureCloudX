@@ -1,12 +1,6 @@
-// LoginPage.jsx — Sign In (Image 1) + Set Password (Image 2)
-// Toggled via internal state: mode = 'login' | 'setpassword'
 
-import { useState } from 'react';
-<<<<<<< HEAD
-
-=======
 import styles from './Loginpage.module.css'
->>>>>>> 351a5d7 (css changes)
+import { useState } from 'react';
 /* ── CITY ILLUSTRATION (right side) ───────────────────────── */
 function CityIllustration() {
   return (

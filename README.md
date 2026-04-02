@@ -1,15 +1,15 @@
-<<<<<<< HEAD
+
 ZeroShield
 AI-Powered Parametric Income Insurance for Q-Commerce Delivery Partners
 =======
-<<<<<<< HEAD
+
 # ZeroShield
 ### AI-Powered Parametric Income Insurance for Q-Commerce Delivery Partners
->>>>>>> 351a5d7 (css changes)
+
 
     Guidewire DEVTrails 2026 | Phase 1 — Ideation & Foundation Persona: Q-Commerce Riders (Zepto / Blinkit / Swiggy Instamart)
 
-<<<<<<< HEAD
+
 The Problem We're Solving
 =======
 ---
@@ -22,8 +22,7 @@ AI-Powered Parametric Income Insurance for Q-Commerce Delivery Partners
     Guidewire DEVTrails 2026 | Phase 1 — Ideation & Foundation Persona: Q-Commerce Riders (Zepto / Blinkit / Swiggy Instamart)
 
 The Problem We're Solving
->>>>>>> e93b0ac (Added frontend code)
->>>>>>> 351a5d7 (css changes)
+
 
 India's Q-Commerce riders (Zepto, Blinkit, Swiggy Instamart) are locked to a fixed dark store zone of 2–5 km. They must complete deliveries in under 10 minutes and earn purely per-order. When an external disruption hits their zone — heavy rain, a heatwave, a spike in pollution, a curfew — their income drops to zero instantly.
 
@@ -33,9 +32,6 @@ No insurance product today covers hyperlocal, zone-level income loss. ZeroShield
 <<<<<<< HEAD
 Persona and Scenarios
 Primary Persona: Ravi, 26 — Zepto Rider, Kondapur Dark Store, Hyderabad
-=======
-<<<<<<< HEAD
->>>>>>> 351a5d7 (css changes)
 
     Works 6 days/week, 8–10 hours/day
     Earns Rs.600–900/day (approximately Rs.4,200–6,300/week)
@@ -61,8 +57,7 @@ Platform Architecture
 
 Our platform follows a clean 6-layer pipeline.
 
-<<<<<<< HEAD
-=======
+
 ```
 =======
 Persona and Scenarios
@@ -92,8 +87,7 @@ Platform Architecture
 
 Our platform follows a clean 6-layer pipeline.
 
->>>>>>> e93b0ac (Added frontend code)
->>>>>>> 351a5d7 (css changes)
+
 Worker App  -->  API Gateway  -->  Core Services + AI/ML Engine + Data Sources
                                           |
                                 Parametric Trigger Engine
@@ -101,35 +95,33 @@ Worker App  -->  API Gateway  -->  Core Services + AI/ML Engine + Data Sources
                               Adversarial Defense and Fraud Shield
                                           |
                                      Payout System
-<<<<<<< HEAD
+
 
 Layer 1 — Worker App (Frontend)
 =======
-<<<<<<< HEAD
+
 ```
 
 ### Layer 1 — Worker App (Frontend)
 =======
 
 Layer 1 — Worker App (Frontend)
->>>>>>> e93b0ac (Added frontend code)
->>>>>>> 351a5d7 (css changes)
+
 
 The rider-facing Progressive Web App (PWA), accessible on both mobile and web.
 
 Key screens include weekly coverage overview, live risk and health alerts for the rider's zone, GigScore dashboard, payout history, Smart Advisor recommendations, and an emergency button for one-tap assistance.
 
 Tech: React Native Web and Expo for a single codebase across Android, iOS, and Web. Firebase OTP login for zero-friction authentication.
-<<<<<<< HEAD
+
 Layer 2 — API Gateway (Backend)
 =======
-<<<<<<< HEAD
+
 
 ### Layer 2 — API Gateway (Backend)
 =======
 Layer 2 — API Gateway (Backend)
->>>>>>> e93b0ac (Added frontend code)
->>>>>>> 351a5d7 (css changes)
+
 
 Single entry point for all client and admin requests. Handles authentication and session validation, rate limiting, request routing to core services, response caching via Redis for weather and AQI data, and webhook listening for Razorpay payout callbacks.
 
@@ -137,8 +129,7 @@ Tech: FastAPI (Python), Redis (Upstash free tier), Firebase Auth.
 <<<<<<< HEAD
 Layer 3 — Core Services
 =======
-<<<<<<< HEAD
->>>>>>> 351a5d7 (css changes)
+
 
 User Management handles rider registration with Aadhaar and phone verification, dark store zone selection with GPS pin registration on a map, weekly earnings declaration, plan subscription management, and GigScore profile initialization.
 
@@ -153,8 +144,8 @@ Risk Prediction AI uses a Gradient Boosted Regressor (XGBoost) trained on zone f
 
 Dynamic Pricing AI computes the final weekly premium using the formula below.
 
-<<<<<<< HEAD
-=======
+
+
 **Risk Prediction AI** uses a Gradient Boosted Regressor (XGBoost) trained on zone flood history, AQI frequency, rider tenure, zone claim density, season, and time of day. It outputs a weekly risk score per zone (0–100) and a per-rider personalized risk score. It is retrained every Sunday midnight.
 
 **Dynamic Pricing AI** computes the final weekly premium using the formula below.
@@ -176,18 +167,15 @@ Risk Prediction AI uses a Gradient Boosted Regressor (XGBoost) trained on zone f
 
 Dynamic Pricing AI computes the final weekly premium using the formula below.
 
->>>>>>> e93b0ac (Added frontend code)
->>>>>>> 351a5d7 (css changes)
+
 Final Weekly Premium = Base Tier
                        x Zone Risk Multiplier (0.85 to 1.40)
                        x Season Factor (1.00 normal | 1.15 summer | 1.25 monsoon)
                        x Claim History Modifier (0.95 clean | 1.10 one claim | 1.30 two or more)
                        x GigScore Discount (1.00 new | 0.95 score 700+ | 0.90 score 850+)
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
+
 ```
->>>>>>> 351a5d7 (css changes)
+
 
 Example for Ravi on the Standard plan during monsoon in Kondapur with a GigScore of 720: Rs.39 x 1.20 x 1.25 x 1.00 x 0.95 = Rs.55.6, rounded to Rs.56 per week.
 
@@ -215,8 +203,7 @@ All sources are polled every 5 minutes via a background cron job on the API serv
 Layer 4 — Parametric Trigger Engine
 
 The core engine monitors all data feeds and fires claims automatically. No rider action is required.
-<<<<<<< HEAD
-=======
+
 
 | Trigger | Fire Condition | Type |
 |---------|----------------|------|
@@ -225,7 +212,7 @@ The core engine monitors all data feeds and fires claims automatically. No rider
 | High Pollution | AQI exceeds 300 (Hazardous) in rider's zone | Environmental |
 | Zone Curfew or Lockdown | Government alert tag active in rider's delivery zone | Social |
 | Platform Outage | Order volume drops more than 80% zone-wide for over 20 continuous minutes | Tech |
-=======
+
 
 Example for Ravi on the Standard plan during monsoon in Kondapur with a GigScore of 720: Rs.39 x 1.20 x 1.25 x 1.00 x 0.95 = Rs.55.6, rounded to Rs.56 per week.
 
@@ -253,39 +240,28 @@ All sources are polled every 5 minutes via a background cron job on the API serv
 Layer 4 — Parametric Trigger Engine
 
 The core engine monitors all data feeds and fires claims automatically. No rider action is required.
->>>>>>> 351a5d7 (css changes)
+
 Trigger 	Fire Condition 	Type
 Heavy Rain 	Rainfall exceeds 15mm/hr in rider's 3km zone 	Environmental
 Heatwave 	Feels-like temperature exceeds 42 degrees Celsius during active shift 	Environmental
 High Pollution 	AQI exceeds 300 (Hazardous) in rider's zone 	Environmental
 Zone Curfew or Lockdown 	Government alert tag active in rider's delivery zone 	Social
 Platform Outage 	Order volume drops more than 80% zone-wide for over 20 continuous minutes 	Tech
-<<<<<<< HEAD
-=======
->>>>>>> e93b0ac (Added frontend code)
->>>>>>> 351a5d7 (css changes)
+
+
 
 Trigger 5 (Platform Outage) is our differentiator. If Zepto or Blinkit's app itself goes down, riders lose income. We cover that. No other insurance product does.
 
 Payout calculation per trigger:
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-```
-=======
->>>>>>> e93b0ac (Added frontend code)
->>>>>>> 351a5d7 (css changes)
+
+
 Payout = Average Hourly Earning x Disrupted Hours x Coverage Ratio
 
 Coverage Ratio: Basic = 60% | Standard = 75% | Premium = 90%
 Disrupted Hours: Determined by trigger start and end timestamps from API data
 Average Hourly Earning: Onboarding-declared, validated against platform order data
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-```
->>>>>>> 351a5d7 (css changes)
+
 
 In addition to payouts, ZeroShield sends health alerts when AQI or heat crosses safety thresholds even if they do not cross the payout trigger level.
 Layer 5 — Adversarial Defense and Anti-Spoofing Strategy
@@ -306,7 +282,7 @@ Peer zone validation 	Other verified riders in the same zone show identical orde
 
 All 7 signals are scored and fed into the Isolation Forest model. A spoofer fails 4 to 5 signals simultaneously, a combination that is statistically near-impossible for a genuine worker.
 
-<<<<<<< HEAD
+
 5.2 Detecting a Coordinated Fraud Ring
 =======
 **5.2 Detecting a Coordinated Fraud Ring**
@@ -332,8 +308,7 @@ Peer zone validation 	Other verified riders in the same zone show identical orde
 All 7 signals are scored and fed into the Isolation Forest model. A spoofer fails 4 to 5 signals simultaneously, a combination that is statistically near-impossible for a genuine worker.
 
 5.2 Detecting a Coordinated Fraud Ring
->>>>>>> e93b0ac (Added frontend code)
->>>>>>> 351a5d7 (css changes)
+
 
 A ring of 500 leaves a completely different signature than a single bad actor.
 
@@ -347,15 +322,14 @@ Geofence Precision Check: Fraud rings approximate the disruption zone coordinate
 
 Cross-Platform Order Activity Check: A rider claiming a disruption payout should not have active order completions on Zepto or Blinkit simultaneously. A simulated platform API cross-reference catches this immediately.
 
-<<<<<<< HEAD
+
 5.3 Protecting Honest Workers from False Flags
 =======
-<<<<<<< HEAD
+
 **5.3 Protecting Honest Workers from False Flags**
 =======
 5.3 Protecting Honest Workers from False Flags
->>>>>>> e93b0ac (Added frontend code)
->>>>>>> 351a5d7 (css changes)
+
 
 Three-Tier Claim Outcome System:
 
@@ -370,7 +344,7 @@ The Honest Network Drop Safeguard: Bad weather causes bad GPS. During verified h
 The Appeal Flow: The rider taps one button to contest the decision and submits a 15-second voice note requiring no typing, designed for riders on the road. A human reviewer sees the voice note and full signal data within 4 hours. If the appeal is upheld, the payout is released and the fraud score is reset to baseline. After three successful appeals, the rider earns a Verified Honest badge that permanently reduces the fraud score weight by 20%.
 
 Ring Isolation: When a fraud ring is detected, only the flagged cluster is held. All other riders in the zone with clean signals continue receiving instant payouts. Honest workers are never collateral damage.
-<<<<<<< HEAD
+
 Attack Vector 	ZeroShield Counter
 GPS spoofing app 	Mock location detection and altitude/interval fingerprinting
 Coordinated Telegram ring 	Temporal clustering and social graph analysis
@@ -382,8 +356,7 @@ Layer 6 — Payout System
 Channel 	Speed 	Used When
 UPI 	Instant, under 1 minute 	Primary — most riders have UPI
 Bank Transfer 	1–2 hours 	Fallback for riders without UPI
-=======
-<<<<<<< HEAD
+
 
 | Attack Vector | ZeroShield Counter |
 |--------------|---------------------|
@@ -400,7 +373,7 @@ Bank Transfer 	1–2 hours 	Fallback for riders without UPI
 |---------|-------|-----------|
 | UPI | Instant, under 1 minute | Primary — most riders have UPI |
 | Bank Transfer | 1–2 hours | Fallback for riders without UPI |
->>>>>>> 351a5d7 (css changes)
+
 
 Powered by Razorpay Test Mode in Phases 1 and 2, moving to live Razorpay in Phase 3. Target: payout credited within 5 minutes of trigger fire.
 Weekly Premium Model
@@ -461,7 +434,7 @@ M Maruthi Sruthi 	Team Lead 	KL University 	2300031907
 K Vaishnavi 	Team Member 	KL University 	2300030318
 A Neeharika 	Team Member 	KL University 	2300030030
 
-<<<<<<< HEAD
+
 Built for Guidewire DEVTrails 2026 — Seed. Scale. Soar. ZeroShield — Because every disrupted hour deserves a safety net.
 =======
 **Platform (B2B) Integration**
@@ -601,5 +574,4 @@ K Vaishnavi 	Team Member 	KL University 	2300030318
 A Neeharika 	Team Member 	KL University 	2300030030
 
 Built for Guidewire DEVTrails 2026 — Seed. Scale. Soar. ZeroShield — Because every disrupted hour deserves a safety net.
->>>>>>> e93b0ac (Added frontend code)
->>>>>>> 351a5d7 (css changes)
+

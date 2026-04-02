@@ -1,14 +1,4 @@
 // App.jsx — Master orchestrator
-<<<<<<< HEAD
-// Changes: Dashboard now imports LocationRiskMap directly via Dashboard.jsx.
-// No changes needed here — App.jsx is identical to original except
-// we removed the stray WeatherRiskCard import that was in the old Dashboard.
-=======
-// ✅ CHANGES vs original:
-//  • Added: import Settings from './Settings'
-//  • Added: screen === 10 renders <Settings />
-//  • Added: onOpenSettings={() => go(10)} prop on <Dashboard />
->>>>>>> 351a5d7 (css changes)
 
 import { useState } from 'react';
 import { GLOBAL_CSS } from './styles';
@@ -18,10 +8,7 @@ import Dashboard from './Dashboard';
 import SignOut from './SignOut';
 import LoginPage from './LoginPage';
 import ProfilePage from './ProfilePage';
-<<<<<<< HEAD
-=======
-import Settings from './Settings'; // ✅ NEW
->>>>>>> 351a5d7 (css changes)
+import Settings from './Settings';
 
 // Screens that show the dark mesh/grid background
 const MESH_SCREENS = [0, 3, 4, 5];
@@ -141,20 +128,13 @@ export default function App() {
           />
         )}
 
-<<<<<<< HEAD
-        {/* 6 — Dashboard (contains LocationRiskMap under Map tab) */}
-=======
         {/* 6 — Dashboard */}
->>>>>>> 351a5d7 (css changes)
         {screen === 6 && (
           <Dashboard
             userData={userData}
             onSignOut={() => go(7)}
             onOpenProfile={() => go(9)}
-<<<<<<< HEAD
-=======
-            onOpenSettings={() => go(10)}  // ✅ NEW
->>>>>>> 351a5d7 (css changes)
+            onOpenSettings={() => go(10)}
           />
         )}
 
@@ -175,9 +155,7 @@ export default function App() {
           />
         )}
 
-<<<<<<< HEAD
-=======
-        {/* 10 — Settings page ✅ NEW */}
+        {/* 10 — Settings page */}
         {screen === 10 && (
           <Settings
             userData={userData}
@@ -187,7 +165,6 @@ export default function App() {
           />
         )}
 
->>>>>>> 351a5d7 (css changes)
       </div>
 
       {showOnboardingNav && <OnboardingFooter />}

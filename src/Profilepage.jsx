@@ -1,9 +1,5 @@
 // ProfilePage.jsx — My ZeroShield Profile page
-<<<<<<< HEAD
-
-=======
-import styles from './ProfilePage.module.css'
->>>>>>> 351a5d7 (css changes)
+import styles from './ProfilePage.module.css';
 export default function ProfilePage({ userData, onClose, onSignOut, onManagePlan }) {
 
   const name = userData?.name || 'Rahul Sharma';

@@ -1,12 +1,6 @@
 // PageDashboard.jsx — Dashboard page with all 8 widgets
-<<<<<<< HEAD
-
-import { Card, CardTitle, Badge, ProgressBar, StatBlock, AlertRow, Button, Timestamp, Shimmer } from './layout';
-
-=======
 import { Card, CardTitle, Badge, ProgressBar, StatBlock, AlertRow, Button, Timestamp, Shimmer } from './layout';
 import styles from './PageDashboard.module.css';
->>>>>>> 351a5d7 (css changes)
 /* ── GAUGE SVG ─── */
 function RiskGauge({ pct = 0.55, label = 'MEDIUM' }) {
   const cx = 90, cy = 90, r = 72;

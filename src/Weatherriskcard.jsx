@@ -1,13 +1,5 @@
-// WeatherRiskCard.jsx
-// Drop this anywhere in your ZeroShield dashboard.
-// Uses only CSS-in-JS inline styles + your existing CSS variables from styles.js
-
 import { useState, useEffect } from 'react';
-<<<<<<< HEAD
-
-=======
-import styles from './WeatherRiskCard.module.css'
->>>>>>> 351a5d7 (css changes)
+import styles from './WeatherRiskCard.module.css';
 /* ═══════════════════════════════════════════════
    SUB-COMPONENTS
 ═══════════════════════════════════════════════ */
