@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import LocationRiskMap from './LocationRiskMap';
 import styles from './Dashboard.module.css';
+import PagePolicy from './PagePolicy';
 
 
 function Card({ children, style = {}, delay = 0 }) {
@@ -549,6 +550,7 @@ const NAV_ITEMS = [
   { id:'GigScore',  icon:'📊', badge:null },
   { id:'Payouts',   icon:'💰', badge:null },
   { id:'Advisor',   icon:'🤖', badge:'AI'  },
+  { id:'Policy',    icon:'📜', badge:'NEW' },  // ← ADD THIS
 ];
 
 const SIDEBAR_W   = 200;
@@ -681,6 +683,7 @@ export default function Dashboard({ userData, onSignOut, onOpenProfile, onOpenSe
     GigScore:  <PageGigScore userData={userData}/>,
     Payouts:   <PagePayouts/>,
     Advisor:   <PageAdvisor userData={userData}/>,
+    Policy:    <PagePolicy/>,  // ← ADD THIS
   };
 
   return (

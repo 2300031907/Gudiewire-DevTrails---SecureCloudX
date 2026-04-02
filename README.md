@@ -126,7 +126,7 @@ Layer 2 — API Gateway (Backend)
 Single entry point for all client and admin requests. Handles authentication and session validation, rate limiting, request routing to core services, response caching via Redis for weather and AQI data, and webhook listening for Razorpay payout callbacks.
 
 Tech: FastAPI (Python), Redis (Upstash free tier), Firebase Auth.
-<<<<<<< HEAD
+
 Layer 3 — Core Services
 =======
 
@@ -283,7 +283,7 @@ Peer zone validation 	Other verified riders in the same zone show identical orde
 All 7 signals are scored and fed into the Isolation Forest model. A spoofer fails 4 to 5 signals simultaneously, a combination that is statistically near-impossible for a genuine worker.
 
 
-5.2 Detecting a Coordinated Fraud Ring
+
 =======
 **5.2 Detecting a Coordinated Fraud Ring**
 =======

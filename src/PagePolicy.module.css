@@ -1,0 +1,406 @@
+/* PagePolicy.module.css */
+
+.page {
+    padding-bottom: 2rem;
+  }
+  
+  .header {
+    margin-bottom: 1.5rem;
+  }
+  
+  .headerTitle {
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-bottom: .2rem;
+    color: var(--text1);
+  }
+  
+  .headerSub {
+    font-size: .78rem;
+    color: var(--text2);
+  }
+  
+  .sectionLabel {
+    font-size: .58rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: rgba(99,160,255,0.5);
+    margin-bottom: .65rem;
+  }
+  
+  .card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(99,160,255,0.1);
+    border-radius: 18px;
+    padding: 1.25rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color .25s, box-shadow .25s;
+  }
+  
+  .card:hover {
+    border-color: rgba(99,160,255,0.22);
+    box-shadow: 0 0 24px rgba(59,130,246,0.07);
+  }
+  
+  .cardTitle {
+    font-size: .75rem;
+    font-weight: 700;
+    color: var(--text1);
+    letter-spacing: -.01em;
+    margin-bottom: .9rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .cardTimestamp {
+    font-size: .6rem;
+    color: var(--text3);
+  }
+  
+  /* Exclusion grid */
+  .exclusionGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .exclusionCard {
+    background: rgba(255,255,255,0.03);
+    border-radius: 18px;
+    padding: 1.25rem;
+    transition: border-color .25s;
+  }
+  
+  .exclusionHeader {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: .75rem;
+  }
+  
+  .exclusionIconBox {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  
+  .exclusionTitle {
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: -.01em;
+  }
+  
+  .clauseList {
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+    margin-bottom: .65rem;
+  }
+  
+  .clauseItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    font-size: .72rem;
+    color: var(--text2);
+    line-height: 1.5;
+  }
+  
+  .clauseX {
+    color: #ef4444;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  
+  .exclusionNote {
+    border-radius: 8px;
+    font-size: .65rem;
+    line-height: 1.55;
+    padding: .5rem .7rem;
+  }
+  
+  /* Actuarial stat cards */
+  .statGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .statCard {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(99,160,255,0.1);
+    border-radius: 18px;
+    padding: 1.25rem;
+  }
+  
+  .statTimestamp {
+    font-size: .58rem;
+    color: var(--text3);
+    margin-bottom: .35rem;
+  }
+  
+  .statValue {
+    font-family: var(--mono);
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+  
+  .statLabel {
+    font-size: .65rem;
+    color: var(--text3);
+    margin-top: 4px;
+  }
+  
+  .statSub {
+    font-size: .6rem;
+    color: rgba(99,160,255,0.4);
+    margin-top: 2px;
+  }
+  
+  /* Two col grid */
+  .twoCol {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* Loss ratio */
+  .lossYearLabel {
+    display: flex;
+    justify-content: space-between;
+    font-size: .72rem;
+    color: var(--text2);
+    margin-bottom: .3rem;
+  }
+  
+  .lossBar {
+    width: 100%;
+    height: 6px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: .4rem;
+  }
+  
+  .lossBarFill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width .6s ease;
+  }
+  
+  .lossMetaGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: .35rem;
+  }
+  
+  .lossMetaCell {
+    padding: .3rem .5rem;
+    background: rgba(255,255,255,0.03);
+    border-radius: 7px;
+    font-size: .6rem;
+  }
+  
+  .lossMetaCellLabel {
+    color: var(--text3);
+    margin-bottom: 2px;
+  }
+  
+  .lossMetaCellValue {
+    font-family: var(--mono);
+    font-weight: 700;
+    color: var(--text1);
+  }
+  
+  /* Reserve */
+  .breakEvenBox {
+    padding: .75rem;
+    background: rgba(16,185,129,0.07);
+    border: 1px solid rgba(16,185,129,0.2);
+    border-radius: 12px;
+    margin-bottom: .85rem;
+  }
+  
+  .breakEvenLabel {
+    font-size: .65rem;
+    color: var(--text3);
+    margin-bottom: .3rem;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+  
+  .breakEvenValue {
+    font-family: var(--mono);
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #10b981;
+    margin-bottom: .2rem;
+  }
+  
+  .breakEvenNote {
+    font-size: .68rem;
+    color: var(--text2);
+    line-height: 1.5;
+  }
+  
+  .reserveRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: .45rem 0;
+    border-top: 1px solid rgba(99,160,255,0.08);
+    font-size: .72rem;
+  }
+  
+  .reserveRowLabel {
+    color: var(--text2);
+    margin-bottom: 2px;
+  }
+  
+  .reserveRowNote {
+    font-size: .6rem;
+    color: rgba(99,160,255,0.4);
+  }
+  
+  .reserveRowValue {
+    font-family: var(--mono);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-left: 1rem;
+  }
+  
+  /* Claims frequency */
+  .claimsGrid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: .75rem;
+  }
+  
+  .claimCell {
+    border-radius: 14px;
+    padding: .85rem;
+    text-align: center;
+  }
+  
+  .claimIcon {
+    font-size: 1.4rem;
+    margin-bottom: .4rem;
+  }
+  
+  .claimTrigger {
+    font-size: .7rem;
+    font-weight: 700;
+    margin-bottom: .3rem;
+  }
+  
+  .claimFreq {
+    font-family: var(--mono);
+    font-size: .85rem;
+    font-weight: 700;
+    color: var(--text1);
+    margin-bottom: .2rem;
+  }
+  
+  .claimPayout {
+    font-size: .6rem;
+    color: var(--text3);
+    margin-bottom: .5rem;
+  }
+  
+  .claimBar {
+    width: 100%;
+    height: 4px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  
+  .claimBarFill {
+    height: 100%;
+    border-radius: 2px;
+  }
+  
+  .claimPct {
+    font-size: .58rem;
+    font-family: var(--mono);
+    font-weight: 700;
+    margin-top: 4px;
+  }
+  
+  /* Formula card */
+  .formulaCard {
+    border-radius: 18px;
+    padding: 1.25rem;
+    background: linear-gradient(135deg, rgba(59,130,246,0.06) 0%, rgba(139,92,246,0.04) 100%);
+    border: 1px solid rgba(59,130,246,0.18);
+  }
+  
+  .formulaGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  
+  .formulaBox {
+    font-family: var(--mono);
+    font-size: .78rem;
+    color: var(--text2);
+    line-height: 2;
+    background: rgba(255,255,255,0.03);
+    border-radius: 10px;
+    padding: .75rem 1rem;
+    border: 1px solid rgba(99,160,255,0.1);
+  }
+  
+  .formulaBoxTitle {
+    color: #60a5fa;
+    font-weight: 700;
+    margin-bottom: .25rem;
+  }
+  
+  .formulaExample {
+    margin-top: .5rem;
+    padding-top: .5rem;
+    border-top: 1px solid rgba(99,160,255,0.1);
+    color: #10b981;
+    font-weight: 700;
+  }
+  
+  .sustainRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .45rem .65rem;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(99,160,255,0.08);
+    border-radius: 9px;
+    margin-bottom: .5rem;
+  }
+  
+  .sustainLabel {
+    font-size: .72rem;
+    color: var(--text2);
+  }
+  
+  .sustainNote {
+    font-size: .6rem;
+    color: rgba(99,160,255,0.4);
+  }
+  
+  .sustainValue {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: .9rem;
+  }
