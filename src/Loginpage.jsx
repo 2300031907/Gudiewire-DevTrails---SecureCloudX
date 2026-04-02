@@ -172,7 +172,7 @@ export default function LoginPage({ onSignIn, onGetStarted }) {
   const [mobile, setMobile] = useState('');
 
   const handleSignIn = () => {
-    if (email && password) onSignIn?.();
+    if (email && password) onSignIn?.({ isNewUser: true });
   };
 
   return (

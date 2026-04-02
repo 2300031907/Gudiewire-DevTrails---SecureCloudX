@@ -1,7 +1,22 @@
-// PagePolicy.jsx — Exclusion Clauses + Actuarial Analysis
+// PagePolicy.jsx — Full Version with All Exclusions + Simulator + History
+
+import { useState } from 'react';
 import styles from './PagePolicy.module.css';
 
 export default function PagePolicy() {
+
+  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [history, setHistory] = useState([]);
+
+  const EVENTS = [
+    { name: 'Heavy Rain',            covered: true,  reason: 'Weather trigger eligible for payout' },
+    { name: 'Heatwave',              covered: true,  reason: 'Temperature-based trigger covered' },
+    { name: 'High AQI',              covered: true,  reason: 'Pollution Shield active' },
+    { name: 'Platform Outage',       covered: true,  reason: 'Platform-wide outage covered' },
+    { name: 'Zone Curfew (Weather)', covered: true,  reason: 'Declared for safety/weather' },
+    { name: 'War',                   covered: false, reason: 'Systemic risk — excluded under policy' },
+    { name: 'Pandemic Lockdown',     covered: false, reason: 'System-wide lockdown — excluded risk' },
+  ];
 
   const EXCLUSIONS = [
     {
@@ -67,10 +82,10 @@ export default function PagePolicy() {
   ];
 
   const STATS = [
-    { v: '47%',    l: 'Target Loss Ratio',    c: '#10b981', sub: 'Claims / Premium Pool' },
-    { v: '₹2.25Cr', l: 'Weekly Premium Pool', c: '#60a5fa', sub: '50,000 riders × ₹45 avg' },
-    { v: '₹11L',   l: 'Net Weekly Margin',    c: '#22d3ee', sub: 'After claims + ops costs' },
-    { v: '3.2×',   l: 'Reserve Coverage Ratio', c: '#a78bfa', sub: 'Reserve / Weekly claims' },
+    { v: '47%',     l: 'Target Loss Ratio',      c: '#10b981', sub: 'Claims / Premium Pool' },
+    { v: '₹2.25Cr', l: 'Weekly Premium Pool',    c: '#60a5fa', sub: '50,000 riders × ₹45 avg' },
+    { v: '₹11L',    l: 'Net Weekly Margin',       c: '#22d3ee', sub: 'After claims + ops costs' },
+    { v: '3.2×',    l: 'Reserve Coverage Ratio',  c: '#a78bfa', sub: 'Reserve / Weekly claims' },
   ];
 
   const LOSS_YEARS = [
@@ -80,12 +95,12 @@ export default function PagePolicy() {
   ];
 
   const RESERVE_ROWS = [
-    { label: 'Seed Reserve Fund',       value: '₹50 Lakhs',  note: 'Covers 4.3 weeks of claims at Year 1 volume',        c: '#60a5fa' },
-    { label: 'Reserve Replenishment',   value: '8% of premium', note: 'Auto-allocated every week to reserve pool',        c: '#a78bfa' },
-    { label: 'Catastrophe Buffer',      value: '₹1.5 Crore', note: 'For simultaneous multi-zone extreme events',          c: '#f59e0b' },
-    { label: 'Reinsurance Trigger',     value: 'Claims > 75%', note: 'Reinsurance partner activated above 75% loss ratio', c: '#ef4444' },
-    { label: 'GigScore Impact on Loss', value: '−18% claims', note: 'High GigScore riders file 18% fewer fraudulent claims', c: '#10b981' },
-    { label: 'Fraud Shield Savings',    value: '₹32L/year',  note: 'Estimated annual savings from Isolation Forest model', c: '#22d3ee' },
+    { label: 'Seed Reserve Fund',      value: '₹50 Lakhs',    note: 'Covers 4.3 weeks of claims at Year 1 volume',         c: '#60a5fa' },
+    { label: 'Reserve Replenishment',  value: '8% of premium', note: 'Auto-allocated every week to reserve pool',           c: '#a78bfa' },
+    { label: 'Catastrophe Buffer',     value: '₹1.5 Crore',   note: 'For simultaneous multi-zone extreme events',           c: '#f59e0b' },
+    { label: 'Reinsurance Trigger',    value: 'Claims > 75%', note: 'Reinsurance partner activated above 75% loss ratio',   c: '#ef4444' },
+    { label: 'GigScore Impact on Loss',value: '−18% claims',  note: 'High GigScore riders file 18% fewer fraudulent claims', c: '#10b981' },
+    { label: 'Fraud Shield Savings',   value: '₹32L/year',    note: 'Estimated annual savings from Isolation Forest model', c: '#22d3ee' },
   ];
 
   const CLAIMS = [
@@ -97,12 +112,18 @@ export default function PagePolicy() {
   ];
 
   const SUSTAIN = [
-    { label: 'Actuarial Safety Margin', value: '21%', note: 'Buffer above expected claims',       c: '#10b981' },
-    { label: 'Operating Cost Ratio',    value: '12%', note: 'Tech + ops + fraud detection',       c: '#60a5fa' },
-    { label: 'Reinsurance Premium',     value: '8%',  note: 'Cedant to reinsurance partner',      c: '#a78bfa' },
-    { label: 'Reserve Contribution',    value: '8%',  note: 'Weekly reserve pool top-up',         c: '#f59e0b' },
-    { label: 'Net Profit Margin',       value: '9%',  note: 'After all deductions at Year 1',     c: '#22d3ee' },
+    { label: 'Actuarial Safety Margin', value: '21%', note: 'Buffer above expected claims',  c: '#10b981' },
+    { label: 'Operating Cost Ratio',    value: '12%', note: 'Tech + ops + fraud detection',  c: '#60a5fa' },
+    { label: 'Reinsurance Premium',     value: '8%',  note: 'Cedant to reinsurance partner', c: '#a78bfa' },
+    { label: 'Reserve Contribution',    value: '8%',  note: 'Weekly reserve pool top-up',    c: '#f59e0b' },
+    { label: 'Net Profit Margin',       value: '9%',  note: 'After all deductions at Year 1',c: '#22d3ee' },
   ];
+
+  // Map event names to their matching exclusion card for detail display
+  const EVENT_EXCLUSION_MAP = {
+    'War':              '⚔️',
+    'Pandemic Lockdown':'🦠',
+  };
 
   return (
     <div className={styles.page}>
@@ -125,7 +146,10 @@ export default function PagePolicy() {
                 style={{ background: ex.color + '18', border: `1px solid ${ex.color}33` }}>
                 {ex.icon}
               </div>
-              <span className={styles.exclusionTitle} style={{ color: ex.color }}>{ex.title}</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
+                <span className={styles.exclusionTitle} style={{ color: ex.color }}>{ex.title}</span>
+                <span style={{ color: '#ef4444', fontSize: '0.75rem', fontWeight: 700 }}>❌ EXCLUDED</span>
+              </div>
             </div>
             <div className={styles.clauseList}>
               {ex.clauses.map((c, j) => (
@@ -260,6 +284,137 @@ export default function PagePolicy() {
             ))}
           </div>
         </div>
+      </div>
+
+      {/* ── SECTION 3: SIMULATOR ── */}
+      <div className={styles.sectionLabel}>Section 3 — Coverage Simulator</div>
+
+      <div className={styles.card}>
+        <div className={styles.cardTitle}>🧪 Try Events</div>
+
+        <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+          {EVENTS.map((e, i) => (
+            <button
+              key={i}
+              onClick={() => {
+                setSelectedEvent(e);
+                setHistory(prev => [
+                  { event: e.name, status: e.covered ? 'APPROVED' : 'REJECTED', reason: e.reason },
+                  ...prev,
+                ]);
+              }}
+              style={{
+                padding: '8px 14px',
+                borderRadius: '10px',
+                background: e.covered ? 'rgba(16,185,129,0.08)' : 'rgba(239,68,68,0.08)',
+                border: `1px solid ${e.covered ? '#10b98133' : '#ef444433'}`,
+                color: e.covered ? '#10b981' : '#ef4444',
+                cursor: 'pointer',
+                fontWeight: 600,
+                fontSize: '0.85rem',
+              }}
+            >
+              {e.covered ? '✅' : '❌'} {e.name}
+            </button>
+          ))}
+        </div>
+
+        {/* Result panel */}
+        {selectedEvent && (
+          <div style={{
+            marginTop: '16px',
+            padding: '14px 16px',
+            borderRadius: '12px',
+            background: selectedEvent.covered ? 'rgba(16,185,129,0.08)' : 'rgba(239,68,68,0.08)',
+            border: `1px solid ${selectedEvent.covered ? '#10b98133' : '#ef444433'}`,
+          }}>
+            <div style={{ fontWeight: 700, fontSize: '1rem', marginBottom: '6px' }}>
+              {selectedEvent.covered ? '✅' : '❌'} {selectedEvent.name}
+            </div>
+            <div style={{ color: selectedEvent.covered ? '#10b981' : '#ef4444', fontWeight: 600 }}>
+              {selectedEvent.covered ? 'COVERED — payout triggered' : 'NOT COVERED — excluded'}
+            </div>
+            <div style={{ marginTop: '6px', color: '#f59e0b', fontSize: '0.85rem' }}>
+              💡 {selectedEvent.reason}
+            </div>
+
+            {/* Show exclusion detail for excluded events */}
+            {!selectedEvent.covered && (() => {
+              const matchIcon = EVENT_EXCLUSION_MAP[selectedEvent.name];
+              const exDetail = EXCLUSIONS.find(ex => ex.icon === matchIcon);
+              if (!exDetail) return null;
+              return (
+                <div style={{
+                  marginTop: '12px',
+                  padding: '12px',
+                  borderRadius: '10px',
+                  background: exDetail.color + '0d',
+                  border: `1px solid ${exDetail.color}33`,
+                }}>
+                  <div style={{ color: exDetail.color, fontWeight: 700, marginBottom: '8px' }}>
+                    {exDetail.icon} {exDetail.title} — Exclusion Detail
+                  </div>
+                  {exDetail.clauses.map((c, j) => (
+                    <div key={j} style={{ fontSize: '0.82rem', color: '#ccc', marginBottom: '4px' }}>
+                      ✕ {c}
+                    </div>
+                  ))}
+                  <div style={{
+                    marginTop: '8px', fontSize: '0.8rem',
+                    color: exDetail.color, background: exDetail.color + '10',
+                    padding: '6px 10px', borderRadius: '6px',
+                  }}>
+                    💡 {exDetail.note}
+                  </div>
+                </div>
+              );
+            })()}
+          </div>
+        )}
+      </div>
+
+      {/* ── SECTION 4: HISTORY ── */}
+      <div className={styles.sectionLabel}>Section 4 — Simulation History</div>
+
+      <div className={styles.card}>
+        <div className={styles.cardTitle}>📜 Event Log</div>
+
+        {history.length === 0 ? (
+          <div style={{ color: '#888', fontSize: '0.85rem' }}>No events tested yet. Click any event above.</div>
+        ) : (
+          <>
+            <div style={{ marginBottom: '10px', display: 'flex', justifyContent: 'flex-end' }}>
+              <button
+                onClick={() => setHistory([])}
+                style={{
+                  padding: '4px 12px', borderRadius: '8px', fontSize: '0.78rem',
+                  background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)',
+                  color: '#888', cursor: 'pointer',
+                }}
+              >
+                Clear Log
+              </button>
+            </div>
+            {history.map((h, i) => (
+              <div key={i} style={{
+                display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start',
+                padding: '8px 0', borderBottom: '1px solid rgba(255,255,255,0.05)',
+              }}>
+                <div>
+                  <span style={{ fontWeight: 600, fontSize: '0.88rem' }}>{h.event}</span>
+                  <div style={{ fontSize: '0.78rem', color: '#888', marginTop: '2px' }}>{h.reason}</div>
+                </div>
+                <span style={{
+                  fontWeight: 700, fontSize: '0.8rem',
+                  color: h.status === 'APPROVED' ? '#10b981' : '#ef4444',
+                  whiteSpace: 'nowrap', marginLeft: '12px',
+                }}>
+                  {h.status === 'APPROVED' ? '✅ APPROVED' : '❌ REJECTED'}
+                </span>
+              </div>
+            ))}
+          </>
+        )}
       </div>
 
     </div>
