@@ -2,7 +2,7 @@
 // Addresses judge feedback: "needs deeper actuarial analysis for full sustainability assessment"
 
 import { useState } from 'react';
-import styles from './PageActuarial.module.css';
+import styles from './Pageactuarial.module.css';
 
 export default function PageActuarial() {
 
