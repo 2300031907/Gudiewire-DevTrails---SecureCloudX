@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { GLOBAL_CSS } from './styles';
+
 import Screen1Landing from './Screen1Landing';
 import { Screen2Mobile, Screen3OTP, Screen4Profile, Screen5Platforms, Screen6Bank } from './OnboardingSteps';
 import Dashboard from './Dashboard';
