@@ -68,7 +68,7 @@ export default function App() {
 
   return (
     <>
-      <style>{GLOBAL_CSS}</style>
+      
 
       {MESH_SCREENS.includes(screen) && <div className="bg-mesh" />}
       {MESH_SCREENS.includes(screen) && <div className="bg-grid" />}
