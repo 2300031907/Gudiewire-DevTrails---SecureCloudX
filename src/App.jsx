@@ -4,8 +4,8 @@ import Screen1Landing from './Screen1Landing';
 import { Screen2Mobile, Screen3OTP, Screen4Profile, Screen5Platforms, Screen6Bank } from './Onboardingsteps';
 import Dashboard from './Dashboard';
 import SignOut from './SignOut';
-import LoginPage from './LoginPage';
-import ProfilePage from './ProfilePage';
+import LoginPage from './Loginpage';
+import ProfilePage from './Profilepage';
 import Settings from './Settings';
 
 const MESH_SCREENS = [0, 3, 4, 5];
