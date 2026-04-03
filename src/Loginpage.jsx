@@ -1,5 +1,5 @@
 
-import styles from './Loginpage.module.css'
+import styles from './LoginPage.module.css'
 import { useState } from 'react';
 /* ── CITY ILLUSTRATION (right side) ───────────────────────── */
 function CityIllustration() {
