@@ -72,6 +72,13 @@ export default function PageActuarial() {
     { label: 'P5  (Best week)',   val: 0,      display: '₹0',       color: '#10b981', pct: 2  },
     { label: 'P25 (Good week)',   val: 280,    display: '₹280',     color: '#22d3ee', pct: 14 },
     { label: 'P50 (Median)',      val: 620,    display: '₹620',     color: '#3b82f6', pct: 30 },
+    { 
+      label: 'Crisis / Humanitarian Fund', 
+      value: '₹25L',   
+      pct: 50, 
+      color: '#f59e0b',  
+      note: 'Reserved exclusively for war/pandemic — ₹200/day per rider for up to 30 days' 
+    },
     { label: 'P75 (Bad week)',    val: 1380,   display: '₹1,380',   color: '#f59e0b', pct: 60 },
     { label: 'P90 (Severe week)', val: 2100,   display: '₹2,100',   color: '#f97316', pct: 82 },
     { label: 'P95 (Extreme)',     val: 2800,   display: '₹2,800',   color: '#ef4444', pct: 94 },
@@ -179,6 +186,19 @@ export default function PageActuarial() {
       reserveStatus: 'Capital Call Required',
       ruinProb: '< 0.5%',
       desc: 'Theoretical worst case: 3-month total zone shutdown. Reinsurance + catastrophe buffer both exhausted. Capital injection needed. Probability < 0.5% per year.',
+    },
+    {
+      id: 'pandemic',
+      label: 'Humanitarian',
+      name: 'War / Pandemic Mode',
+      icon: '🆘',
+      color: '#f59e0b',
+      weeklyLoss: '₹3.8Cr',
+      lossRatio: '169%',
+      reserveImpact: 'Crisis Fund + Govt Partnership',
+      reserveStatus: 'Crisis Mode Active',
+      ruinProb: 'N/A — Govt backed',
+      desc: 'During declared national emergencies (pandemic, war, civic shutdown), ZeroShield activates a humanitarian payout of ₹200/day per rider automatically — no trigger verification needed. Funded via a dedicated crisis reserve + government relief partnership. Riders are never abandoned.',
     },
   ];
 
@@ -490,7 +510,7 @@ export default function PageActuarial() {
             { icon: '✅', label: 'Basis Risk',         verdict: 'Mitigated',   note: 'Over/under-trigger rates quantified + technical controls in place', c: '#10b981' },
             { icon: '✅', label: 'Solvency Test',      verdict: '3.2× Ratio',  note: 'Solvent through 1-in-50-year events; reinsurance covers extremes', c: '#10b981' },
             { icon: '✅', label: 'Capital Adequacy',   verdict: 'Adequate',    note: 'Reserve stack + reinsurance covers all scenarios above P99', c: '#10b981' },
-            { icon: '✅', label: 'War / Pandemic',     verdict: 'Excluded',    note: 'Systemic exclusions prevent uninsurable correlated losses', c: '#10b981' },
+            { icon: '🆘', label: 'War / Pandemic', verdict: 'Crisis Fund', note: 'Dedicated humanitarian reserve activated during declared national emergencies — ₹200/day survival payout, no trigger required', c: '#f59e0b' },
           ].map((s, i) => (
             <div key={i} className={styles.summaryCell} style={{ borderLeft: `3px solid ${s.c}` }}>
               <div className={styles.summaryCellTop}>

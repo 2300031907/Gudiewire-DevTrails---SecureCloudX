@@ -312,9 +312,9 @@ The parametric trigger architecture is persona-agnostic. The roadmap beyond Phas
 | Mobile and PWA | React Native Web and Expo |
 | Web Admin Dashboard | React.js and Tailwind CSS |
 | Maps and Zone Visualization | Mapbox GL JS (free tier) |
-| Backend API | FastAPI (Python) |
+| Backend API | Spring Boot (JPA / Hibernate) |
 | Authentication | Firebase Auth (OTP) |
-| Primary Database | PostgreSQL with PostGIS for geospatial zone queries |
+| Primary Database | MySQL (using MySQL Workbench) |
 | Cache and Event Queue | Redis (Upstash free tier) |
 | ML Risk and Pricing | XGBoost (Python / scikit-learn) |
 | ML Fraud Detection | Isolation Forest (scikit-learn) |

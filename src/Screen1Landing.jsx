@@ -190,175 +190,192 @@ export default function Screen1Landing({ onGetStarted, onSignIn }) {
         </div>
       )}
 
-      {/* ═══ DASHBOARD GRID ═══ */}
-      <div className={`${styles.grid} ${showModal ? styles.gridPaddingModal : styles.gridPaddingNormal} ${showModal ? styles.gridBlurred : ''}`}>
+      {/* ════════════════════════════════════════════
+          PAGE BODY — wraps grid + modal together so
+          the absolute modalWrap can centre the modal
+          over the grid without position:fixed.
+      ════════════════════════════════════════════ */}
+      <div className={styles.pageBody}>
 
-        {/* ── ROW 1 ── */}
+        {/* ═══ DASHBOARD GRID ═══ */}
+        <div className={`${styles.grid} ${showModal ? styles.gridBlurred : ''}`}>
 
-        {/* Income Risk Meter */}
-        {showModal
-          ? <LockedWidget title="Income Risk Meter"><GaugeMini label="MEDIUM" pct={0.55} /></LockedWidget>
-          : (
-            <Card>
-              <CardTitle>Income Risk Meter</CardTitle>
-              <GaugeMini label="MEDIUM" pct={0.55} />
-              <div style={{ marginTop: '.5rem', fontSize: '.88rem', fontWeight: 600, color: 'rgba(240,246,255,0.8)' }}>
-                <span style={{ color: '#f0f6ff', fontWeight: 700 }}>Medium</span> risk today
-              </div>
-            </Card>
-          )
-        }
+          {/* ── ROW 1 ── */}
 
-        {/* Weather Disruption */}
-        <Card>
-          <CardTitle icon="⛈️">{showModal ? 'Weather Alert' : 'Weather Disruption'}</CardTitle>
-          <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
-            <div style={{ flex: 1 }}>
-              <div style={{ fontSize: '.88rem', color: 'rgba(240,246,255,0.75)', marginBottom: '.4rem', lineHeight: 1.5 }}>
-                {showModal ? 'Heavy rain is expected today.' : 'Heavy rain expected between 4 PM – 8 PM'}
-              </div>
-              <div style={{ fontSize: '.78rem', color: 'rgba(240,246,255,0.45)' }}>
-                Income disruption {showModal ? 'probability' : 'risk'}: Medium{showModal ? '.' : ''}
-              </div>
-            </div>
-            <div style={{ fontSize: '3rem', opacity: .55, flexShrink: 0 }}>🌧️</div>
-          </div>
-        </Card>
-
-        {/* GigScore */}
-        {showModal
-          ? <LockedWidget title="GigScore"><div style={{ padding: '.5rem 0' }}><RingScore score={72} /></div></LockedWidget>
-          : (
-            <Card style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '1.5rem' }}>
-              <CardTitle>GigScore</CardTitle>
-              <RingScore score={72} />
-            </Card>
-          )
-        }
-
-        {/* ── ROW 2 ── */}
-
-        {/* Coverage */}
-        {showModal
-          ? (
-            <Card locked>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: '.75rem' }}>
-                <span style={{ fontSize: '.8rem', opacity: .4 }}>🔒</span>
-                <span style={{ fontSize: '.78rem', fontWeight: 600, color: 'rgba(240,246,255,0.35)' }}>Coverage</span>
-              </div>
-              <div style={{ fontSize: '.9rem', fontFamily: 'JetBrains Mono, monospace', color: 'rgba(240,246,255,0.25)', marginBottom: '.5rem' }}>
-                ₹ XXXX protected this week
-              </div>
-              <div style={{ height: 4, background: 'rgba(255,255,255,0.06)', borderRadius: 2 }}>
-                <div style={{ width: '55%', height: '100%', background: 'rgba(59,130,246,0.3)', borderRadius: 2 }} />
-              </div>
-            </Card>
-          ) : (
-            <Card>
-              <CardTitle icon="🛡️">Coverage</CardTitle>
-              <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '1.5rem', fontWeight: 700, color: '#f0f6ff', marginBottom: '.25rem' }}>
-                ₹ 3,200 <span style={{ fontSize: '.85rem', fontWeight: 400, color: 'rgba(240,246,255,0.5)', fontFamily: 'Sora, sans-serif' }}>protected this week</span>
-              </div>
-              <div style={{ fontSize: '.72rem', color: 'rgba(240,246,255,0.4)', marginTop: '.35rem' }}>Rookie Partner Level</div>
-              <div style={{ marginTop: '.75rem', height: 4, background: 'rgba(255,255,255,0.08)', borderRadius: 2 }}>
-                <div style={{ width: '55%', height: '100%', background: 'linear-gradient(90deg, #3b82f6, #22d3ee)', borderRadius: 2 }} />
-              </div>
-            </Card>
-          )
-        }
-
-        {/* Delivery Zone Heatmap */}
-        <Card>
-          <CardTitle icon="📍">Delivery Zone Heatmap</CardTitle>
-          <HeatmapCard />
-        </Card>
-
-        {/* Alerts */}
-        <Card>
-          <CardTitle icon="🔔">Alerts</CardTitle>
-          {[
-            { icon: '🟡', title: 'Storm Warning',    time: 'Today 4:00 PM', sub: 'Heavy rain and flooding expected', dotColor: '#f59e0b' },
-            { icon: '⚠️', title: 'Heat Advisory',    time: 'Today 2:00 PM', sub: 'Extreme heat conditions',          dotColor: '#ef4444' },
-            { icon: '🟢', title: 'Air Quality Alert', time: 'Today 9:30 AM', sub: 'Unhealthy AQI 162',                dotColor: '#10b981' },
-          ].map((a, i) => (
-            <div key={i} style={{
-              display: 'flex', alignItems: showModal ? 'center' : 'flex-start', gap: '.65rem',
-              padding: '.5rem 0',
-              borderBottom: i < 2 ? '1px solid rgba(99,160,255,0.07)' : 'none',
-            }}>
-              {showModal
-                ? <span style={{ fontSize: '.8rem', opacity: .35 }}>🔒</span>
-                : <div style={{ width: 7, height: 7, borderRadius: '50%', background: a.dotColor, flexShrink: 0, marginTop: 5, boxShadow: `0 0 5px ${a.dotColor}` }} />
-              }
-              <div style={{ flex: 1 }}>
-                <div style={{ fontSize: '.78rem', fontWeight: 700, color: showModal ? 'rgba(240,246,255,0.3)' : 'rgba(240,246,255,0.85)' }}>
-                  {a.title}
-                  <span style={{ fontWeight: 400, color: 'rgba(240,246,255,0.4)', fontSize: '.7rem', marginLeft: 6 }}>{a.time}</span>
+          {/* Income Risk Meter */}
+          {showModal
+            ? <LockedWidget title="Income Risk Meter"><GaugeMini label="MEDIUM" pct={0.55} /></LockedWidget>
+            : (
+              <Card>
+                <CardTitle>Income Risk Meter</CardTitle>
+                <GaugeMini label="MEDIUM" pct={0.55} />
+                <div style={{ marginTop: '.5rem', fontSize: '.88rem', fontWeight: 600, color: 'rgba(240,246,255,0.8)' }}>
+                  <span style={{ color: '#f0f6ff', fontWeight: 700 }}>Medium</span> risk today
                 </div>
-                {!showModal && <div style={{ fontSize: '.68rem', color: 'rgba(240,246,255,0.4)', marginTop: 2 }}>{a.sub}</div>}
+              </Card>
+            )
+          }
+
+          {/* Weather Disruption */}
+          <Card>
+            <CardTitle icon="⛈️">{showModal ? 'Weather Alert' : 'Weather Disruption'}</CardTitle>
+            <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: '.88rem', color: 'rgba(240,246,255,0.75)', marginBottom: '.4rem', lineHeight: 1.5 }}>
+                  {showModal ? 'Heavy rain is expected today.' : 'Heavy rain expected between 4 PM – 8 PM'}
+                </div>
+                <div style={{ fontSize: '.78rem', color: 'rgba(240,246,255,0.45)' }}>
+                  Income disruption {showModal ? 'probability' : 'risk'}: Medium{showModal ? '.' : ''}
+                </div>
               </div>
-              {showModal && <span style={{ fontSize: '.62rem', color: 'rgba(240,246,255,0.25)', display: 'flex', alignItems: 'center', gap: 3 }}>🔒 Locked</span>}
+              <div style={{ fontSize: '3rem', opacity: .55, flexShrink: 0 }}>🌧️</div>
             </div>
-          ))}
-        </Card>
+          </Card>
 
-        {/* ── ROW 3 — Sign in CTA bar (open state only) ── */}
-        {!showModal && (
-          <div className={styles.ctaBar}>
-            <span className={styles.ctaBarText}>
-              Sign in to activate your personalized protection dashboard
-            </span>
-            <button onClick={onSignIn} className={styles.ctaBarBtn}>
-              Sign In
-            </button>
-          </div>
-        )}
+          {/* GigScore */}
+          {showModal
+            ? <LockedWidget title="GigScore"><div style={{ padding: '.5rem 0' }}><RingScore score={72} /></div></LockedWidget>
+            : (
+              <Card style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '1.5rem' }}>
+                <CardTitle>GigScore</CardTitle>
+                <RingScore score={72} />
+              </Card>
+            )
+          }
 
-        {/* Lock preview button (open state only) */}
-        {!showModal && (
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <button onClick={() => setShowModal(true)} className={styles.lockBtn}>
-              🔒 Lock preview
-            </button>
+          {/* ── ROW 2 ── */}
+
+          {/* Coverage */}
+          {showModal
+            ? (
+              <Card locked>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: '.75rem' }}>
+                  <span style={{ fontSize: '.8rem', opacity: .4 }}>🔒</span>
+                  <span style={{ fontSize: '.78rem', fontWeight: 600, color: 'rgba(240,246,255,0.35)' }}>Coverage</span>
+                </div>
+                <div style={{ fontSize: '.9rem', fontFamily: 'JetBrains Mono, monospace', color: 'rgba(240,246,255,0.25)', marginBottom: '.5rem' }}>
+                  ₹ XXXX protected this week
+                </div>
+                <div style={{ height: 4, background: 'rgba(255,255,255,0.06)', borderRadius: 2 }}>
+                  <div style={{ width: '55%', height: '100%', background: 'rgba(59,130,246,0.3)', borderRadius: 2 }} />
+                </div>
+              </Card>
+            ) : (
+              <Card>
+                <CardTitle icon="🛡️">Coverage</CardTitle>
+                <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '1.5rem', fontWeight: 700, color: '#f0f6ff', marginBottom: '.25rem' }}>
+                  ₹ 3,200 <span style={{ fontSize: '.85rem', fontWeight: 400, color: 'rgba(240,246,255,0.5)', fontFamily: 'Sora, sans-serif' }}>protected this week</span>
+                </div>
+                <div style={{ fontSize: '.72rem', color: 'rgba(240,246,255,0.4)', marginTop: '.35rem' }}>Rookie Partner Level</div>
+                <div style={{ marginTop: '.75rem', height: 4, background: 'rgba(255,255,255,0.08)', borderRadius: 2 }}>
+                  <div style={{ width: '55%', height: '100%', background: 'linear-gradient(90deg, #3b82f6, #22d3ee)', borderRadius: 2 }} />
+                </div>
+              </Card>
+            )
+          }
+
+          {/* Delivery Zone Heatmap */}
+          <Card>
+            <CardTitle icon="📍">Delivery Zone Heatmap</CardTitle>
+            <HeatmapCard />
+          </Card>
+
+          {/* Alerts */}
+          <Card>
+            <CardTitle icon="🔔">Alerts</CardTitle>
+            {[
+              { icon: '🟡', title: 'Storm Warning',    time: 'Today 4:00 PM', sub: 'Heavy rain and flooding expected', dotColor: '#f59e0b' },
+              { icon: '⚠️', title: 'Heat Advisory',    time: 'Today 2:00 PM', sub: 'Extreme heat conditions',          dotColor: '#ef4444' },
+              { icon: '🟢', title: 'Air Quality Alert', time: 'Today 9:30 AM', sub: 'Unhealthy AQI 162',                dotColor: '#10b981' },
+            ].map((a, i) => (
+              <div key={i} style={{
+                display: 'flex', alignItems: showModal ? 'center' : 'flex-start', gap: '.65rem',
+                padding: '.5rem 0',
+                borderBottom: i < 2 ? '1px solid rgba(99,160,255,0.07)' : 'none',
+              }}>
+                {showModal
+                  ? <span style={{ fontSize: '.8rem', opacity: .35 }}>🔒</span>
+                  : <div style={{ width: 7, height: 7, borderRadius: '50%', background: a.dotColor, flexShrink: 0, marginTop: 5, boxShadow: `0 0 5px ${a.dotColor}` }} />
+                }
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontSize: '.78rem', fontWeight: 700, color: showModal ? 'rgba(240,246,255,0.3)' : 'rgba(240,246,255,0.85)' }}>
+                    {a.title}
+                    <span style={{ fontWeight: 400, color: 'rgba(240,246,255,0.4)', fontSize: '.7rem', marginLeft: 6 }}>{a.time}</span>
+                  </div>
+                  {!showModal && <div style={{ fontSize: '.68rem', color: 'rgba(240,246,255,0.4)', marginTop: 2 }}>{a.sub}</div>}
+                </div>
+                {showModal && <span style={{ fontSize: '.62rem', color: 'rgba(240,246,255,0.25)', display: 'flex', alignItems: 'center', gap: 3 }}>🔒 Locked</span>}
+              </div>
+            ))}
+          </Card>
+
+          {/* ── ROW 3 — Sign in CTA bar (open state only) ── */}
+          {!showModal && (
+            <div className={styles.ctaBar}>
+              <span className={styles.ctaBarText}>
+                Sign in to activate your personalized protection dashboard
+              </span>
+              <button onClick={onSignIn} className={styles.ctaBarBtn}>
+                Sign In
+              </button>
+            </div>
+          )}
+
+          {/* Lock preview button (open state only) */}
+          {!showModal && (
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <button onClick={() => setShowModal(true)} className={styles.lockBtn}>
+                🔒 Lock preview
+              </button>
+            </div>
+          )}
+
+        </div>
+        {/* ═══ END GRID ═══ */}
+
+        {/* ════════════════════════════════════════════
+            MODAL — sits inside pageBody so modalWrap's
+            position:absolute + flex centres it perfectly
+            over the grid without any fixed-position bugs.
+        ════════════════════════════════════════════ */}
+        {showModal && (
+          <div className={styles.modalWrap}>
+            <div className={styles.modal}>
+
+              <button onClick={() => setShowModal(false)} className={styles.modalClose}>✕</button>
+              <div className={styles.modalGlow} />
+              <div className={styles.modalShield}>🛡️</div>
+
+              <div className={styles.modalHeadline}>
+                <h2 className={styles.modalH2}>
+                  Unlock AI-powered<br />income protection insights
+                </h2>
+                <p className={styles.modalSub}>
+                  Sign in to personalize your risk prediction, coverage status and payouts dashboard
+                </p>
+              </div>
+
+              <button onClick={onGetStarted} className={styles.modalCta}>
+                Get Started
+              </button>
+
+              <div className={styles.modalSignInRow}>
+                Already have an account?{' '}
+                <button onClick={onSignIn} className={styles.modalSignInLink}>Sign In</button>
+              </div>
+
+              <div className={styles.trustBadges}>
+                {['⚡ Auto-payouts', '🛡️ Zero claim forms', '🔒 Bank-grade security'].map((b, i) => (
+                  <span key={i} className={styles.trustBadge}>{b}</span>
+                ))}
+              </div>
+
+            </div>
           </div>
         )}
 
       </div>
-
-      {/* ═══ MODAL OVERLAY ═══ */}
-      {showModal && (
-        <div className={styles.modal}>
-
-          <button onClick={() => setShowModal(false)} className={styles.modalClose}>✕</button>
-          <div className={styles.modalGlow} />
-          <div className={styles.modalShield}>🛡️</div>
-
-          <div className={styles.modalHeadline}>
-            <h2 className={styles.modalH2}>
-              Unlock AI-powered<br />income protection insights
-            </h2>
-            <p className={styles.modalSub}>
-              Sign in to personalize your risk prediction, coverage status and payouts dashboard
-            </p>
-          </div>
-
-          <button onClick={onGetStarted} className={styles.modalCta}>
-            Get Started
-          </button>
-
-          <div className={styles.modalSignInRow}>
-            Already have an account?{' '}
-            <button onClick={onSignIn} className={styles.modalSignInLink}>Sign In</button>
-          </div>
-
-          <div className={styles.trustBadges}>
-            {['⚡ Auto-payouts', '🛡️ Zero claim forms', '🔒 Bank-grade security'].map((b, i) => (
-              <span key={i} className={styles.trustBadge}>{b}</span>
-            ))}
-          </div>
-
-        </div>
-      )}
+      {/* ═══ END PAGE BODY ═══ */}
 
       {/* ═══ FOOTER ═══ */}
       <div className={styles.footer}>
@@ -366,6 +383,7 @@ export default function Screen1Landing({ onGetStarted, onSignIn }) {
           <a key={l} href="#" className={styles.footerLink}>{l}</a>
         ))}
       </div>
+
     </div>
   );
 }

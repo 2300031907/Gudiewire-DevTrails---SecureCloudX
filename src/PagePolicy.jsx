@@ -14,8 +14,16 @@ export default function PagePolicy() {
     { name: 'High AQI',              covered: true,  reason: 'Pollution Shield active' },
     { name: 'Platform Outage',       covered: true,  reason: 'Platform-wide outage covered' },
     { name: 'Zone Curfew (Weather)', covered: true,  reason: 'Declared for safety/weather' },
-    { name: 'War',                   covered: false, reason: 'Systemic risk — excluded under policy' },
-    { name: 'Pandemic Lockdown',     covered: false, reason: 'System-wide lockdown — excluded risk' },
+    {
+      name: 'War',
+      covered: false,
+      reason: 'Excluded under standard policy — supported via Crisis Fund (₹200/day humanitarian payout)'
+    },
+    {
+      name: 'Pandemic Lockdown',
+      covered: false,
+      reason: 'Excluded under standard policy — Crisis Fund activated for survival support'
+    }
   ];
 
   const EXCLUSIONS = [
@@ -27,7 +35,7 @@ export default function PagePolicy() {
         'Riots causing zone disruption beyond 48 hours',
         'Government-declared national emergency (non-weather)',
       ],
-      note: 'Civic disruptions under Section 144 are covered only if declared for weather or public health reasons.',
+      note: 'Excluded from standard policy. However, Crisis Fund provides ₹200/day humanitarian payout during declared national emergencies.',
     },
     {
       icon: '🦠', title: 'Pandemic & Epidemic Events', color: '#f59e0b',
@@ -37,7 +45,7 @@ export default function PagePolicy() {
         'Platform shutdowns due to government health orders',
         'Income loss due to rider personal illness or quarantine',
       ],
-      note: 'Zone-level AQI spikes due to industrial pollution remain covered under the Pollution Shield.',
+      note: 'Excluded from standard policy. Crisis Fund activates ₹200/day rider support during lockdown or pandemic situations.',
     },
     {
       icon: '🌋', title: 'Acts of God — Beyond Trigger Scope', color: '#8b5cf6',
@@ -98,6 +106,12 @@ export default function PagePolicy() {
     { label: 'Seed Reserve Fund',      value: '₹50 Lakhs',    note: 'Covers 4.3 weeks of claims at Year 1 volume',         c: '#60a5fa' },
     { label: 'Reserve Replenishment',  value: '8% of premium', note: 'Auto-allocated every week to reserve pool',           c: '#a78bfa' },
     { label: 'Catastrophe Buffer',     value: '₹1.5 Crore',   note: 'For simultaneous multi-zone extreme events',           c: '#f59e0b' },
+    {
+      label: 'Crisis / Humanitarian Fund',
+      value: '₹25 Lakhs',
+      note: 'Dedicated reserve for war/pandemic — ₹200/day per rider for up to 30 days',
+      c: '#f59e0b'
+    },
     { label: 'Reinsurance Trigger',    value: 'Claims > 75%', note: 'Reinsurance partner activated above 75% loss ratio',   c: '#ef4444' },
     { label: 'GigScore Impact on Loss',value: '−18% claims',  note: 'High GigScore riders file 18% fewer fraudulent claims', c: '#10b981' },
     { label: 'Fraud Shield Savings',   value: '₹32L/year',    note: 'Estimated annual savings from Isolation Forest model', c: '#22d3ee' },
@@ -300,6 +314,7 @@ export default function PagePolicy() {
                 setSelectedEvent(e);
                 setHistory(prev => [
                   { event: e.name, status: e.covered ? 'APPROVED' : 'REJECTED', reason: e.reason },
+
                   ...prev,
                 ]);
               }}
@@ -314,7 +329,7 @@ export default function PagePolicy() {
                 fontSize: '0.85rem',
               }}
             >
-              {e.covered ? '✅' : '❌'} {e.name}
+              {e.covered ? '✅' : e.crisis ? '🆘' : '❌'} {e.name}
             </button>
           ))}
         </div>
@@ -331,9 +346,24 @@ export default function PagePolicy() {
             <div style={{ fontWeight: 700, fontSize: '1rem', marginBottom: '6px' }}>
               {selectedEvent.covered ? '✅' : '❌'} {selectedEvent.name}
             </div>
-            <div style={{ color: selectedEvent.covered ? '#10b981' : '#ef4444', fontWeight: 600 }}>
-              {selectedEvent.covered ? 'COVERED — payout triggered' : 'NOT COVERED — excluded'}
-            </div>
+            <div
+              style={{
+                  color: selectedEvent.covered
+                 ? '#10b981'
+                 : selectedEvent.crisis
+                 ? '#f59e0b'
+                  : '#ef4444',
+                 fontWeight: 600
+                     }}
+              >
+         {
+           selectedEvent.covered
+               ? 'COVERED — payout triggered'
+        : selectedEvent.crisis
+        ? '🆘 CRISIS FUND ACTIVATED — ₹200/day support'
+        : 'NOT COVERED — excluded'
+  }
+</div>
             <div style={{ marginTop: '6px', color: '#f59e0b', fontSize: '0.85rem' }}>
               💡 {selectedEvent.reason}
             </div>
