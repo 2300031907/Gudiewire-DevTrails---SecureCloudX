@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 import Screen1Landing from './Screen1Landing';
-import { Screen2Mobile, Screen3OTP, Screen4Profile, Screen5Platforms, Screen6Bank } from './OnboardingSteps';
+import { Screen2Mobile, Screen3OTP, Screen4Profile, Screen5Platforms, Screen6Bank } from './Onboardingsteps';
 import Dashboard from './Dashboard';
 import SignOut from './SignOut';
 import LoginPage from './LoginPage';
