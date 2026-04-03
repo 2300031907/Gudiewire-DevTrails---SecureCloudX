@@ -158,7 +158,7 @@ export default function App() {
               console.log('FINAL DATA:', finalData);
 
               try {
-                const response = await fetch('http://localhost:8080/api/user/save-profile', {
+                const response = await fetch('https://guidewire-backend-ocs4.onrender.com/api/user/save-profile', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify(finalData),

@@ -118,7 +118,7 @@ export function Screen2Mobile({ onNext }) {
     }
 
     try {
-      const response = await fetch("http://localhost:8080/api/auth/send-otp", {
+      const response = await fetch("https://guidewire-backend-ocs4.onrender.com/api/auth/send-otp", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -235,7 +235,7 @@ export function Screen3OTP({ phone, onNext }) {
     const enteredOtp = otp.join("");
 
     try {
-      const response = await fetch("http://localhost:8080/api/auth/verify-otp", {
+      const response = await fetch("https://guidewire-backend-ocs4.onrender.com/api/auth/verify-otp", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
