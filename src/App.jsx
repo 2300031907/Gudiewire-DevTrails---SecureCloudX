@@ -88,7 +88,7 @@ export default function App() {
         {/* 8 — Login → ALWAYS goes straight to dashboard */}
         {screen === 8 && (
           <LoginPage
-            onSignIn={() => go(6)}
+            onSignIn={() => go(1)}
             onGetStarted={() => go(1)}
           />
         )}
