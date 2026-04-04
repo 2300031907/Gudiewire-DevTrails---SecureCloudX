@@ -1,12 +1,9 @@
 // Screen1Landing.jsx
-// State A: Open preview dashboard (showModal=false) — widgets visible with demo data
-// State B: Modal overlay (showModal=true) — same dashboard dimmed, centered modal with X to close
-
 import { useState } from 'react';
 import styles from './Screen1Landing.module.css';
 
 /* ══════════════════════════════════════════════
-   SHARED MINI-COMPONENTS
+   MINI COMPONENTS
 ══════════════════════════════════════════════ */
 
 function GaugeMini({ label = 'MEDIUM', pct = 0.55 }) {
@@ -90,7 +87,6 @@ function HeatmapCard() {
         {[34,68,102,136,170,204,238,272,306].map(x => <line key={x} x1={x} y1="0" x2={x} y2="150" stroke="rgba(255,255,255,0.04)" strokeWidth="1" />)}
         {[30,60,90,120].map(y => <line key={y} x1="0" y1={y} x2="340" y2={y} stroke="rgba(255,255,255,0.04)" strokeWidth="1" />)}
         <path d="M0 75 Q85 48 170 75 Q255 102 340 75" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="2.5" />
-        <path d="M170 0 Q185 75 170 150" fill="none" stroke="rgba(255,255,255,0.07)" strokeWidth="1.5" />
         <rect width="340" height="150" fill="url(#hm1)" />
         <rect width="340" height="150" fill="url(#hm2)" />
         {[[155,62,22,18],[175,75,18,15],[138,75,16,14],[165,55,14,12]].map(([x,y,w,h],i) => (
@@ -106,9 +102,6 @@ function HeatmapCard() {
   );
 }
 
-/* ══════════════════════════════════════════════
-   CARD WRAPPER
-══════════════════════════════════════════════ */
 function Card({ children, style = {}, locked = false }) {
   return (
     <div className={`${styles.card} ${locked ? styles.cardLocked : styles.cardNormal}`} style={style}>
@@ -126,9 +119,6 @@ function CardTitle({ icon, children }) {
   );
 }
 
-/* ══════════════════════════════════════════════
-   LOCKED WIDGET
-══════════════════════════════════════════════ */
 function LockedWidget({ title, children, style = {} }) {
   return (
     <div className={styles.lockedWidget} style={style}>
@@ -136,12 +126,8 @@ function LockedWidget({ title, children, style = {} }) {
         <span style={{ fontSize: '.85rem', opacity: .4 }}>🔒</span>
         <span style={{ fontSize: '.78rem', fontWeight: 600, color: 'rgba(240,246,255,0.35)', fontFamily: 'Sora, sans-serif' }}>{title}</span>
       </div>
-      <div className={styles.lockedContent}>
-        {children}
-      </div>
-      <div className={styles.lockedFooter}>
-        🔒 Login required
-      </div>
+      <div className={styles.lockedContent}>{children}</div>
+      <div className={styles.lockedFooter}>🔒 Login required</div>
     </div>
   );
 }
@@ -155,13 +141,12 @@ export default function Screen1Landing({ onGetStarted, onSignIn }) {
   return (
     <div className={styles.root}>
 
-      {/* ═══ TOP NAV ═══ */}
+      {/* NAV */}
       <nav className={styles.nav}>
         <div className={styles.navBrand}>
           <div className={styles.navLogo}>🛡️</div>
           <span className={styles.navBrandText}>ZEROSHIELD</span>
         </div>
-
         <div className={styles.navLinks}>
           {['Coverage', 'Alerts', 'GigScore', 'Pricing'].map((l, i) => (
             <a key={l} href="#"
@@ -170,37 +155,27 @@ export default function Screen1Landing({ onGetStarted, onSignIn }) {
             </a>
           ))}
         </div>
-
         <button onClick={onSignIn} className={styles.navSignIn}>
-          <span style={{ fontSize: '1rem' }}>👤</span>
-          Sign In
+          <span>👤</span> Sign In
         </button>
       </nav>
 
-      {/* ═══ HERO HEADLINE (open state only) ═══ */}
+      {/* HERO (only when modal closed) */}
       {!showModal && (
         <div className={styles.hero}>
           <h1 className={styles.heroTitle}>
             <span className={styles.heroGradient}>AI-powered income</span>
-            <span style={{ color: 'rgba(240,246,255,0.7)', fontWeight: 400 }}> protection preview for delivery partners</span>
+            <span style={{ color: 'rgba(240,246,255,0.7)', fontWeight: 400 }}> protection preview</span>
           </h1>
-          <p className={styles.heroSub}>
-            Explore how ZeroShield predicts weather risks and protects your earnings
-          </p>
+          <p className={styles.heroSub}>Explore how ZeroShield predicts weather risks and protects your earnings</p>
         </div>
       )}
 
-      {/* ════════════════════════════════════════════
-          PAGE BODY — wraps grid + modal together so
-          the absolute modalWrap can centre the modal
-          over the grid without position:fixed.
-      ════════════════════════════════════════════ */}
+      {/* PAGE BODY */}
       <div className={styles.pageBody}>
 
-        {/* ═══ DASHBOARD GRID ═══ */}
+        {/* GRID */}
         <div className={`${styles.grid} ${showModal ? styles.gridBlurred : ''}`}>
-
-          {/* ── ROW 1 ── */}
 
           {/* Income Risk Meter */}
           {showModal
@@ -216,7 +191,7 @@ export default function Screen1Landing({ onGetStarted, onSignIn }) {
             )
           }
 
-          {/* Weather Disruption */}
+          {/* Weather */}
           <Card>
             <CardTitle icon="⛈️">{showModal ? 'Weather Alert' : 'Weather Disruption'}</CardTitle>
             <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
@@ -225,7 +200,7 @@ export default function Screen1Landing({ onGetStarted, onSignIn }) {
                   {showModal ? 'Heavy rain is expected today.' : 'Heavy rain expected between 4 PM – 8 PM'}
                 </div>
                 <div style={{ fontSize: '.78rem', color: 'rgba(240,246,255,0.45)' }}>
-                  Income disruption {showModal ? 'probability' : 'risk'}: Medium{showModal ? '.' : ''}
+                  Income disruption {showModal ? 'probability' : 'risk'}: Medium
                 </div>
               </div>
               <div style={{ fontSize: '3rem', opacity: .55, flexShrink: 0 }}>🌧️</div>
@@ -242,8 +217,6 @@ export default function Screen1Landing({ onGetStarted, onSignIn }) {
               </Card>
             )
           }
-
-          {/* ── ROW 2 ── */}
 
           {/* Coverage */}
           {showModal
@@ -274,7 +247,7 @@ export default function Screen1Landing({ onGetStarted, onSignIn }) {
             )
           }
 
-          {/* Delivery Zone Heatmap */}
+          {/* Heatmap */}
           <Card>
             <CardTitle icon="📍">Delivery Zone Heatmap</CardTitle>
             <HeatmapCard />
@@ -284,9 +257,9 @@ export default function Screen1Landing({ onGetStarted, onSignIn }) {
           <Card>
             <CardTitle icon="🔔">Alerts</CardTitle>
             {[
-              { icon: '🟡', title: 'Storm Warning',    time: 'Today 4:00 PM', sub: 'Heavy rain and flooding expected', dotColor: '#f59e0b' },
-              { icon: '⚠️', title: 'Heat Advisory',    time: 'Today 2:00 PM', sub: 'Extreme heat conditions',          dotColor: '#ef4444' },
-              { icon: '🟢', title: 'Air Quality Alert', time: 'Today 9:30 AM', sub: 'Unhealthy AQI 162',                dotColor: '#10b981' },
+              { title: 'Storm Warning',    time: 'Today 4:00 PM', sub: 'Heavy rain and flooding expected', dotColor: '#f59e0b' },
+              { title: 'Heat Advisory',    time: 'Today 2:00 PM', sub: 'Extreme heat conditions',          dotColor: '#ef4444' },
+              { title: 'Air Quality Alert',time: 'Today 9:30 AM', sub: 'Unhealthy AQI 162',                dotColor: '#10b981' },
             ].map((a, i) => (
               <div key={i} style={{
                 display: 'flex', alignItems: showModal ? 'center' : 'flex-start', gap: '.65rem',
@@ -304,46 +277,40 @@ export default function Screen1Landing({ onGetStarted, onSignIn }) {
                   </div>
                   {!showModal && <div style={{ fontSize: '.68rem', color: 'rgba(240,246,255,0.4)', marginTop: 2 }}>{a.sub}</div>}
                 </div>
-                {showModal && <span style={{ fontSize: '.62rem', color: 'rgba(240,246,255,0.25)', display: 'flex', alignItems: 'center', gap: 3 }}>🔒 Locked</span>}
+                {showModal && <span style={{ fontSize: '.62rem', color: 'rgba(240,246,255,0.25)' }}>🔒 Locked</span>}
               </div>
             ))}
           </Card>
 
-          {/* ── ROW 3 — Sign in CTA bar (open state only) ── */}
+          {/* CTA bar (open only) */}
           {!showModal && (
             <div className={styles.ctaBar}>
-              <span className={styles.ctaBarText}>
-                Sign in to activate your personalized protection dashboard
-              </span>
-              <button onClick={onSignIn} className={styles.ctaBarBtn}>
-                Sign In
-              </button>
+              <span className={styles.ctaBarText}>Sign in to activate your personalized protection dashboard</span>
+              <button onClick={onSignIn} className={styles.ctaBarBtn}>Sign In</button>
             </div>
           )}
 
-          {/* Lock preview button (open state only) */}
+          {/* Lock preview (open only) */}
           {!showModal && (
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <button onClick={() => setShowModal(true)} className={styles.lockBtn}>
-                🔒 Lock preview
-              </button>
+              <button onClick={() => setShowModal(true)} className={styles.lockBtn}>🔒 Lock preview</button>
             </div>
           )}
 
         </div>
-        {/* ═══ END GRID ═══ */}
 
-        {/* ════════════════════════════════════════════
-            MODAL — sits inside pageBody so modalWrap's
-            position:absolute + flex centres it perfectly
-            over the grid without any fixed-position bugs.
-        ════════════════════════════════════════════ */}
+        {/* ══════════════════════════════════════════
+            MODAL — shield is INSIDE the modal div,
+            flows naturally, never clipped
+        ══════════════════════════════════════════ */}
         {showModal && (
           <div className={styles.modalWrap}>
             <div className={styles.modal}>
 
               <button onClick={() => setShowModal(false)} className={styles.modalClose}>✕</button>
               <div className={styles.modalGlow} />
+
+              {/* Shield — inline, not absolute */}
               <div className={styles.modalShield}>🛡️</div>
 
               <div className={styles.modalHeadline}>
@@ -355,9 +322,7 @@ export default function Screen1Landing({ onGetStarted, onSignIn }) {
                 </p>
               </div>
 
-              <button onClick={onGetStarted} className={styles.modalCta}>
-                Get Started
-              </button>
+              <button onClick={onGetStarted} className={styles.modalCta}>Get Started</button>
 
               <div className={styles.modalSignInRow}>
                 Already have an account?{' '}
@@ -375,9 +340,8 @@ export default function Screen1Landing({ onGetStarted, onSignIn }) {
         )}
 
       </div>
-      {/* ═══ END PAGE BODY ═══ */}
 
-      {/* ═══ FOOTER ═══ */}
+      {/* FOOTER */}
       <div className={styles.footer}>
         {['About', 'Contact', 'Privacy', 'Terms'].map(l => (
           <a key={l} href="#" className={styles.footerLink}>{l}</a>
